@@ -1,0 +1,1 @@
+export {type UserStatuses, UserStatusesEnum, type UserBase, type UserWithPassword, type User, type OtpBody} from "./model/user.model";

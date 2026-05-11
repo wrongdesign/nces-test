@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import {AuthFormType} from "@/features/auth";
 import baseQueryWithErrorHandling from "@/shared/api/fetcher";
+import {OtpBody, User} from "@/entities/user";
 
 
 export const authApi = createApi({
@@ -12,16 +13,16 @@ export const authApi = createApi({
             AuthFormType
         >({
             query: ({ email, password }) => ({
-                url: "/api/auth",
+                url: "/api/auth/login",
                 method: "POST",
                 body: { email, password },
             }),
         }),
-        verify2fa: builder.mutation<{ access_token: string }, { pin: string }>({
+        verify2fa: builder.mutation<User, OtpBody>({
             query: ({ pin }) => ({
-                url: "/api/auth/v1/admin/verify-2fa",
+                url: "/api/auth/otp",
                 method: "POST",
-                body: { "2fa_code": pin },
+                body: { pin: pin },
             }),
         }),
     }),

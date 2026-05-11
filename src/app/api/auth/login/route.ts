@@ -1,20 +1,6 @@
 import {NextResponse} from 'next/server';
 import {AuthFormType} from "@/features/auth";
-
-const elements: AuthFormType[] = [
-    {
-        email: "email@email.com",
-        password: "12345678",
-    },
-    {
-        email: "email2@email.com",
-        password: "12345678",
-    },
-    {
-        email: "email3@email.com",
-        password: "12345678",
-    },
-];
+import {elements} from "./mocks";
 
 export async function POST(request: Request) {
     try {
