@@ -1,25 +1,24 @@
 "use client"
 
-import {useState} from "react";
 import {AuthFormType} from "@/features/auth";
+import {useLoginMutation} from "@/shared/model/store/api/auth.api";
+import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
 
 const useLogin = () => {
-    const [loading, setLoading] = useState<boolean>(false); // TODO: Replace with RTK Query loading
+    const [login, {isLoading: loginLoading, error: loginError}] = useLoginMutation();
+
+    useApiErrorToast(loginError);
 
     const onSubmit = async (data: AuthFormType) => {
         try {
-            setLoading(true);
-
-            console.log(data);
+            await login(data);
         } catch (e) {
             console.log(e);
-        } finally {
-            setLoading(false);
         }
     }
 
     return {
-        loading,
+        loading: loginLoading,
         onSubmit,
     };
 }
