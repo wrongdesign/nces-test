@@ -1,8 +1,8 @@
 "use client"
 
-import { clsx } from 'clsx';
 import {Button} from "@/shared/ui/button";
 import type {MouseEventHandler, PropsWithChildren} from "react";
+import {cn} from "@/shared/model/utils/utils";
 
 interface Props {
     buttonText: string;
@@ -21,10 +21,10 @@ const DefaultFormWrapper = ({
     buttonDisabled,
 }: PropsWithChildren<Props>) => {
     return (
-        <div className={clsx('gap-12', mainWrapperStyles)}>
+        <div className={cn('gap-12', mainWrapperStyles)}>
             {children}
 
-            <div className={clsx('flex flex-row justify-end', buttonWrapperStyles)}>
+            <div className={cn('flex flex-row justify-end', buttonWrapperStyles)}>
                 <Button onClick={buttonSubmit} variant="default" disabled={buttonDisabled}>
                     <p>{buttonText}</p>
                 </Button>

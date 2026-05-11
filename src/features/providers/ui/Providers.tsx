@@ -11,8 +11,7 @@ const Providers = ({ children }: PropsWithChildren) => {
             <ThemeProvider
                 attribute="class"
                 defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
+                forcedTheme="system"
             >
                 <Suspense fallback={<LoaderComponent />}>
                     {children}
