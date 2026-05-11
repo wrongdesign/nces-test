@@ -1,0 +1,1 @@
+export const LOADER_DEFAULT_SIZE = 24;
