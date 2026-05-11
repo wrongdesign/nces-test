@@ -4,18 +4,20 @@ import storage from 'redux-persist/lib/storage';
 import { thunk } from 'redux-thunk';
 import { createRedirectionMiddleware } from "./middleware";
 import {useDispatch, useSelector} from "react-redux";
-import {apiReducers} from "./reducers";
+import {apiReducers, authReducer} from "./reducers";
 import {authApi} from "./api/auth.api";
+import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from "redux-persist/es/constants";
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: [],
+    whitelist: ['auth'],
     blacklist: [],
 };
 
 const rootReducer = combineReducers({
     ...apiReducers,
+    ...authReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,9 +30,18 @@ const initStore = () => {
         middleware: (getDefaultMiddleware) => {
             const middleware = getDefaultMiddleware({
                 serializableCheck: {
-                    ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
-                    ignoredPaths: [],
-                    ignoredActionPaths: [],
+                    ignoredActions: [
+                        FLUSH,
+                        REHYDRATE,
+                        PAUSE,
+                        PERSIST,
+                        PURGE,
+                        REGISTER,
+                    ],
+                    ignoredActionPaths: [
+                        "meta.arg",
+                        "meta.baseQueryMeta",
+                    ],
                 },
             }).concat(
                 authApi.middleware,
