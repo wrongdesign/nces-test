@@ -25,7 +25,7 @@ const DefaultFormWrapper = ({
             {children}
 
             <div className={cn('flex flex-row justify-end', buttonWrapperStyles)}>
-                <Button onClick={buttonSubmit} variant="default" disabled={buttonDisabled}>
+                <Button onClick={buttonSubmit} variant="default" disabled={buttonDisabled} className={"hover:cursor-pointer"}>
                     <p>{buttonText}</p>
                 </Button>
             </div>

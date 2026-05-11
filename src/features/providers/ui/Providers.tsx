@@ -4,6 +4,7 @@ import {type PropsWithChildren, Suspense} from "react";
 import ReduxProvider from "./ReduxProvider";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {ThemeProvider} from "next-themes";
+import {Toaster} from "@/shared/ui/sonner";
 
 const Providers = ({ children }: PropsWithChildren) => {
     return(
@@ -16,6 +17,7 @@ const Providers = ({ children }: PropsWithChildren) => {
                 <Suspense fallback={<LoaderComponent />}>
                     {children}
                 </Suspense>
+                <Toaster />
             </ThemeProvider>
         </ReduxProvider>
     );

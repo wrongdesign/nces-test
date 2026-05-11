@@ -2,8 +2,10 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { thunk } from 'redux-thunk';
-import { createRedirectionMiddleware } from "@/shared/model/store/middleware";
+import { createRedirectionMiddleware } from "./middleware";
 import {useDispatch, useSelector} from "react-redux";
+import {apiReducers} from "./reducers";
+import {authApi} from "./api/auth.api";
 
 const persistConfig = {
     key: 'root',
@@ -13,6 +15,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+    ...apiReducers,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -29,7 +32,9 @@ const initStore = () => {
                     ignoredPaths: [],
                     ignoredActionPaths: [],
                 },
-            });
+            }).concat(
+                authApi.middleware,
+            );
 
             if (!middleware.includes(thunk)) {
                 middleware.push(thunk);
