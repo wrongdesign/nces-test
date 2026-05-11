@@ -3,6 +3,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { thunk } from 'redux-thunk';
 import { createRedirectionMiddleware } from "@/shared/model/store/middleware";
+import {useDispatch, useSelector} from "react-redux";
 
 const persistConfig = {
     key: 'root',
@@ -59,3 +60,6 @@ export const persistor = persistStore(store);
 export type AppStore = ReturnType<typeof initStore>;
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = AppStore['dispatch'];
+
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();
