@@ -1,4 +1,4 @@
-import type {StandardObjectWithClassNames} from "@/shared/model/types/common";
+import type {StandardObjectWithClassNames, StandardObjectWithStyles} from "@/shared/model/types/common";
 
 export enum TaskStatusEnum {
     TODO = "todo",
@@ -48,6 +48,36 @@ export const PriorityLabeled: Record<PriorityType, StandardObjectWithClassNames>
         label: 'High',
         code: PriorityEnum.HIGH,
         classNames: 'bg-gradient-to-r from-red-500 to-pink-500',
+    },
+};
+
+export const StatusesLabeled: Record<TaskStatusType, StandardObjectWithStyles> = {
+    todo: {
+        label: 'Waiting',
+        code: TaskStatusEnum.TODO,
+        styles: {
+            color: '#f5c697',
+            backgroundColor: '#9e5400',
+        },
+        classNames: 'bg-[#9e5400]',
+    },
+    inProgress: {
+        label: 'In Progress',
+        code: TaskStatusEnum.INPROGRESS,
+        styles: {
+            color: '#97b2f5',
+            backgroundColor: '#00329e',
+        },
+        classNames: 'bg-[#00329e]',
+    },
+    done: {
+        label: 'Done',
+        code: TaskStatusEnum.DONE,
+        styles: {
+            color: '#c1f49c',
+            backgroundColor: '#459a00',
+        },
+        classNames: 'bg-[#459a00]',
     },
 };
 
