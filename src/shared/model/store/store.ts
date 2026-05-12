@@ -4,20 +4,22 @@ import storage from 'redux-persist/lib/storage';
 import { thunk } from 'redux-thunk';
 import { createRedirectionMiddleware } from "./middleware";
 import {useDispatch, useSelector} from "react-redux";
-import {apiReducers, authReducer} from "./reducers";
+import {apiReducers, authReducer, taskReducer} from "./reducers";
 import {authApi} from "./api/auth.api";
 import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from "redux-persist/es/constants";
+import {taskApi} from "@/shared/model/store/api/task.api";
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth'],
+    whitelist: ['auth', 'task'],
     blacklist: [],
 };
 
 const rootReducer = combineReducers({
     ...apiReducers,
     ...authReducer,
+    ...taskReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -45,6 +47,7 @@ const initStore = () => {
                 },
             }).concat(
                 authApi.middleware,
+                taskApi.middleware,
             );
 
             if (!middleware.includes(thunk)) {
