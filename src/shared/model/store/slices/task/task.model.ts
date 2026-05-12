@@ -1,11 +1,16 @@
 import type {Task, TaskPaginationInfo} from "@/entities/task";
 
-export interface TaskResponse {
+export interface TaskPaginationResponse {
     pagination: TaskPaginationInfo | undefined;
+}
+
+export interface TaskResponse extends TaskPaginationResponse {
     tasks: Task[] | undefined;
 }
 
-export interface TaskState extends TaskResponse {
+export interface TaskState extends TaskPaginationResponse {
+    fetchTags: boolean;
+    fetchTasks: boolean;
     selectedTaskId: string | undefined;
     currentPage: number;
 }

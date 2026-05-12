@@ -13,8 +13,7 @@ const Providers = ({ children }: PropsWithChildren) => {
         <ReduxProvider>
             <ThemeProvider
                 attribute="class"
-                defaultTheme={"dark"}
-                forcedTheme={theme}
+                defaultTheme={theme}
             >
                 <Suspense fallback={<LoaderComponent />}>
                     <TooltipProvider>
