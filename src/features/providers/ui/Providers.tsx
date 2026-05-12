@@ -5,6 +5,7 @@ import ReduxProvider from "./ReduxProvider";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {ThemeProvider, useTheme} from "next-themes";
 import {Toaster} from "@/shared/ui/sonner";
+import {TooltipProvider} from "@/shared/ui/tooltip";
 
 const Providers = ({ children }: PropsWithChildren) => {
     const { theme } = useTheme();
@@ -16,7 +17,9 @@ const Providers = ({ children }: PropsWithChildren) => {
                 forcedTheme={theme}
             >
                 <Suspense fallback={<LoaderComponent />}>
-                    {children}
+                    <TooltipProvider>
+                        {children}
+                    </TooltipProvider>
                 </Suspense>
                 <Toaster />
             </ThemeProvider>
