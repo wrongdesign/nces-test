@@ -2,29 +2,29 @@
 
 import useGetTasks from "@/features/task/api/hooks/useGetTasks";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
-import {useAppSelector} from "@/shared/model/store";
-import {PAGINATION_LIMIT, TaskComponent} from "@/features/task";
+import {useAppDispatch} from "@/shared/model/store";
+import {TaskComponent} from "@/features/task";
 import {useEffect} from "react";
+import {setFetchTags, setFetchTasks} from "@/shared/model/store/slices/task/task.slice";
 
 const TaskList = () => {
-    const tasks = useAppSelector(state => state.task.tasks);
+    const dispatch = useAppDispatch();
 
-    const currentPage = useAppSelector(state => state.task.currentPage);
-
-    const { getTasks, tasksLoading } = useGetTasks();
+    const { tasks, loading, tags } = useGetTasks();
 
     useEffect(() => {
-        getTasks({page: currentPage, limit: PAGINATION_LIMIT});
-    }, [getTasks, currentPage]);
+        dispatch(setFetchTasks(true));
+        dispatch(setFetchTags(true));
+    }, [dispatch]);
 
     return(
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {tasks && tasks.length > 0 && (
                     tasks.map((task) => (
-                        <TaskComponent key={task.id} {...task} />
+                        <TaskComponent key={task.id} {...task} tagsList={tags} />
                     ))
                 )}
-                {tasksLoading && <LoaderComponent fixed={true} />}
+                {loading && <LoaderComponent fixed={true} />}
             </div>
 
 
