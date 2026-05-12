@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
         const limit = Number(searchParams.get("limit")) ?? undefined
 
-        const mockTasks: Task[] = readFile("./mocks/tasks.json");
+        const mockTasks: Task[] = readFile("src/app/api/task/mocks/tasks.json");
 
         const sortedTasks = [...mockTasks].sort(
             (a, b) => {
