@@ -7,4 +7,5 @@ export interface TaskResponse {
 
 export interface TaskState extends TaskResponse {
     selectedTaskId: string | undefined;
+    currentPage: number;
 }
