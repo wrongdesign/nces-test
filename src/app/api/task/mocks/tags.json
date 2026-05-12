@@ -1,0 +1,18 @@
+[
+  {
+    "id": "tag_team",
+    "name": "Team"
+  },
+  {
+    "id": "tag_today",
+    "name": "Today"
+  },
+  {
+    "id": "tag_backend",
+    "name": "Backend"
+  },
+  {
+    "id": "tag_frontend",
+    "name": "Frontend"
+  }
+]

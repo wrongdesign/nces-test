@@ -1,6 +1,7 @@
 import {type NextRequest, NextResponse} from "next/server";
 import {INTERNAL_ERROR} from "@/app/api/config/common";
-import {mockTasks} from "@/app/api/task/mocks";
+import {readFile} from "@/app/api/task/utils/common";
+import type {Task} from "@/entities/task";
 
 export async function GET(request: NextRequest) {
     try {
@@ -9,6 +10,8 @@ export async function GET(request: NextRequest) {
         const page = Number(searchParams.get("page")) ?? undefined
 
         const limit = Number(searchParams.get("limit")) ?? undefined
+
+        const mockTasks: Task[] = readFile("./mocks/tasks.json");
 
         const sortedTasks = [...mockTasks].sort(
             (a, b) => {
