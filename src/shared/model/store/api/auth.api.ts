@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import {AuthFormType} from "@/features/auth";
+import type {AuthFormType} from "@/features/auth";
 import baseQueryWithErrorHandling from "@/shared/api/fetcher";
-import {OtpBody, User} from "@/entities/user";
+import type {OtpBody, User} from "@/entities/user";
 
 
 export const authApi = createApi({

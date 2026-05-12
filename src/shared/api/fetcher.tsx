@@ -5,16 +5,16 @@ import type {
 } from "@reduxjs/toolkit/query";
 
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import {RootState} from "@/shared/model/store";
+import type {RootState} from "@/shared/model/store";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
     prepareHeaders: (headers, { getState }) => {
-        // const token = (getState() as RootState).auth.token;
+        const token = (getState() as RootState).auth.access_token;
 
-        // if (token) {
-        //     headers.set("Authorization", `Bearer ${token}`);
-        // }
+        if (token) {
+            headers.set("Authorization", `Bearer ${token}`);
+        }
 
         headers.set("Content-Type", "application/json");
 

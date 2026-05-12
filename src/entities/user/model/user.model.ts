@@ -22,7 +22,7 @@ export interface UserWithPassword extends UserBase {
 
 export interface User {
     user: UserBase;
-    access_token: string;
+    access_token: string | undefined;
 }
 
 export interface OtpBody {

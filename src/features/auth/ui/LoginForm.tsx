@@ -1,9 +1,9 @@
 "use client"
 
 import {useForm} from "react-hook-form";
-import {AuthFormType, authSchema} from "@/features/auth";
+import {type AuthFormType, authSchema} from "@/features/auth";
 import {zodResolver} from "@hookform/resolvers/zod";
-import DefaultFormWrapper from "@/widgets/ui/DefaultFormWrapper";
+import DefaultFormWrapper from "@/widgets/DefaultFormWrapper/DefaultFormWrapper";
 import FormField from "@/shared/ui/FormField";
 import useLogin from "@/features/auth/api/hooks/useLogin";
 

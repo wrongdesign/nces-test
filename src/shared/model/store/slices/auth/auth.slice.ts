@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {User, UserBase, UserStatusesEnum} from "@/entities/user";
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import {type User, type UserBase, UserStatusesEnum} from "@/entities/user";
 
 const userInitial: UserBase = {
     index: 0,
@@ -13,7 +13,7 @@ const userInitial: UserBase = {
 
 const initialState: User = {
     user: userInitial,
-    access_token: '',
+    access_token: undefined,
 };
 
 export const authSlice = createSlice({
@@ -26,7 +26,7 @@ export const authSlice = createSlice({
         },
         clearUser: (state) => {
             state.user = initialState.user;
-            state.access_token = '';
+            state.access_token = undefined;
         },
     },
 });
