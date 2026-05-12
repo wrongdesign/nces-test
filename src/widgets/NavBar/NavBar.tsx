@@ -6,6 +6,7 @@ import LoaderComponent from "@/shared/ui/LoaderComponent";
 import Image from "next/image";
 import Logout from "@/widgets/Logout/Logout";
 import ThemeToggle from "@/widgets/ThemeToggle/ThemeToggle";
+import DefaultBlock from "@/shared/ui/DefaultBlock";
 
 const NavBar = () => {
     const router = useRouter();
@@ -14,7 +15,7 @@ const NavBar = () => {
     return(
         <>
             <div className="flex flex-row justify-between my-6">
-                <div className={'bg-popover py-6 px-4 rounded-2xl flex flex-col gap-4 justify-center'}>
+                <DefaultBlock>
                     <Image
                         alt={'Logo'}
                         className="cursor-pointer"
@@ -27,17 +28,16 @@ const NavBar = () => {
                             })
                         }
                     />
-                </div>
+                </DefaultBlock>
 
-                <div className={'bg-popover py-6 px-4 rounded-2xl flex flex-col justify-center gap-4'}>
+                <DefaultBlock>
                     {/*{finalMenuItemsList}*/}
-                </div>
+                </DefaultBlock>
 
-
-                <div className={'bg-popover py-6 px-4 rounded-2xl flex flex-row justify-center gap-4'}>
+                <DefaultBlock>
                     <ThemeToggle />
                     <Logout />
-                </div>
+                </DefaultBlock>
             </div>
             {isPending && <LoaderComponent />}
         </>
