@@ -1,6 +1,6 @@
 "use client"
 
-import {PriorityLabeled, type Task, TaskStatusEnum} from "@/entities/task";
+import {PriorityLabeled, type Tag, type Task, TaskStatusEnum} from "@/entities/task";
 import {Button} from "@/shared/ui/button";
 import {cn} from "@/shared/model/utils/utils";
 import {Calendar, CalendarClock, CalendarSync} from "lucide-react";
@@ -8,7 +8,21 @@ import {Tooltip, TooltipContent, TooltipTrigger} from "@/shared/ui/tooltip";
 import {StatusesLabeled} from "@/entities/task/model/task.model";
 import {Badge} from "@/shared/ui/badge";
 
-const TaskComponent = ({ title, description, createdAt, status, tags, priority, updatedAt, deadline}: Task) => {
+interface Props {
+    tagsList: Tag[] | undefined;
+}
+
+const TaskComponent = ({
+    title,
+    description,
+    createdAt,
+    status,
+    tags,
+    priority,
+    updatedAt,
+    deadline,
+    tagsList
+}: Task & Props) => {
     const handleTaskDetailsOpen = () => {
 
     }
@@ -40,10 +54,10 @@ const TaskComponent = ({ title, description, createdAt, status, tags, priority, 
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 text-xs mb-4">
                 <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                         <div className="flex items-center gap-1">
                             <Calendar className="text-gray-600 dark:text-white" size={20} />
-                            <p className="text-sm leading-none text-gray-600dark:text-white">
+                            <p className="text-sm leading-none text-gray-600 dark:text-white">
                                 {new Date(createdAt ?? '').toLocaleString()}
                             </p>
                         </div>
@@ -55,7 +69,7 @@ const TaskComponent = ({ title, description, createdAt, status, tags, priority, 
 
                 {updatedAt && (
                     <Tooltip>
-                        <TooltipTrigger>
+                        <TooltipTrigger asChild>
                             <div className="flex items-center gap-1">
                                 <CalendarSync className="text-gray-600 dark:text-white" size={20} />
                                 <p className="text-sm text-gray-600 dark:text-white">{new Date(createdAt ?? '').toLocaleString()}</p>
@@ -68,7 +82,7 @@ const TaskComponent = ({ title, description, createdAt, status, tags, priority, 
                 )}
 
                 <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                         <div className="flex items-center gap-1">
                             <CalendarClock className="text-gray-600 dark:text-white" size={20} />
                             <p className="text-sm leading-none text-gray-600 dark:text-white">
@@ -86,7 +100,7 @@ const TaskComponent = ({ title, description, createdAt, status, tags, priority, 
                 {tags && tags.length > 0 && (
                     tags.map((tag) => (
                         <Badge key={tag}  variant="default">
-                            {tag}
+                            {tagsList?.find((tagObject) => tagObject.id === tag)?.name ?? tag}
                         </Badge>
                     ))
                 )}
