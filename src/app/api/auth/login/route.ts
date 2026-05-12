@@ -1,6 +1,7 @@
 import {NextResponse} from 'next/server';
 import type {AuthFormType} from "@/features/auth";
 import {elements} from "./mocks";
+import {INTERNAL_ERROR} from "@/app/api/config/common";
 
 export async function POST(request: Request) {
     try {
@@ -38,15 +39,6 @@ export async function POST(request: Request) {
     } catch (error) {
         console.error("[AUTH_LOGIN]", error)
 
-        return NextResponse.json(
-            {
-                message:
-                    (error as Error).message ??
-                    "Internal Error",
-            },
-            {
-                status: 500,
-            }
-        )
+        return INTERNAL_ERROR(error);
     }
 }
