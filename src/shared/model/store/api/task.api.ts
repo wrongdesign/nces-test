@@ -2,6 +2,7 @@ import {createApi} from "@reduxjs/toolkit/query/react";
 import baseQueryWithErrorHandling from "@/shared/api/fetcher";
 import type {TaskResponse} from "@/shared/model/store/slices/task/task.model";
 import type {Pagination} from "@/shared/model/types/common";
+import type {Tag} from "@/entities/task";
 
 export const taskApi = createApi({
     reducerPath: 'taskApi',
@@ -17,7 +18,13 @@ export const taskApi = createApi({
                 },
             })
         }),
+        getTags: builder.query<Tag[], void>({
+            query: () => ({
+                url: "/api/task/tags",
+                method: "GET",
+            })
+        })
     })
 })
 
-export const { useLazyGetTasksQuery } = taskApi
+export const { useLazyGetTasksQuery, useLazyGetTagsQuery } = taskApi
