@@ -1,4 +1,4 @@
-import {User, UserStatusesEnum} from "@/entities/user";
+import {type User, UserStatusesEnum} from "@/entities/user";
 
 export const otp: string[] = ["000000", "111111", "222222", "333333", "444444"];
 

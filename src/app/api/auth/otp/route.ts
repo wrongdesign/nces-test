@@ -1,6 +1,6 @@
 import {NextResponse} from 'next/server';
 import {otp, user} from "./mocks";
-import {OtpBody} from "@/entities/user";
+import type {OtpBody} from "@/entities/user";
 
 export async function POST(request: Request) {
     try {

@@ -1,5 +1,5 @@
 import {NextResponse} from 'next/server';
-import {AuthFormType} from "@/features/auth";
+import type {AuthFormType} from "@/features/auth";
 import {elements} from "./mocks";
 
 export async function POST(request: Request) {

@@ -1,4 +1,4 @@
-import {AuthFormType} from "@/features/auth";
+import type {AuthFormType} from "@/features/auth";
 
 export const elements: AuthFormType[] = [
     {
