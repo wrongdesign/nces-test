@@ -7,6 +7,9 @@ import {CalendarClock} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/shared/ui/tooltip";
 import {Badge} from "@/shared/ui/badge";
 import {StatusChange, useUpdateTaskStatus} from "@/features/task";
+import {useRouter} from "next/dist/client/components/navigation";
+import {useTransition} from "react";
+import LoaderComponent from "@/shared/ui/LoaderComponent";
 
 interface Props {
     tagsList: Tag[] | undefined;
@@ -22,19 +25,22 @@ const TaskComponent = ({
     tagsList,
     id,
 }: Task & Props) => {
+    const router = useRouter();
+    const [isPending, startTransition] = useTransition();
+
     const { updateTaskStatus, updateStatusLoading } = useUpdateTaskStatus();
 
     const expiredDeadline: boolean = new Date() > new Date(deadline);
-
-    const handleTaskDetailsOpen = () => {
-
-    }
 
     return(
         <Button
             className="flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none"
             variant={expiredDeadline ? "destructive" : "secondary"}
-            onClick={handleTaskDetailsOpen}
+            onClick={() => {
+                startTransition(() => {
+                    router.push(`/dashboard/task/${id}`);
+                })
+            }}
             disabled={updateStatusLoading}
         >
             <div className="flex flex-row w-full items-center justify-between mb-3">
@@ -76,6 +82,8 @@ const TaskComponent = ({
                     ))
                 )}
             </div>
+
+            {isPending && <LoaderComponent />}
         </Button>
     );
 }
