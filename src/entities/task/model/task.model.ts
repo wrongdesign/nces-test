@@ -21,11 +21,18 @@ export interface Tag {
     name: string;
 }
 
-export interface Task {
+export interface TaskStatusInterface {
+    status: TaskStatusType;
+}
+
+export interface TaskStatusUpdate extends TaskStatusInterface {
+    id: string;
+}
+
+export interface Task extends TaskStatusInterface {
     id: string;
     title: string;
     description?: string;
-    status: TaskStatusType;
     priority: PriorityType;
     deadline: string;
     tags: string[];

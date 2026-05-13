@@ -5,3 +5,5 @@ export { PAGINATION_LIMIT } from "./model/constants/common";
 export {default as TaskList} from "./ui/TaskList";
 
 export {default as StatusChange} from "./ui/StatusChange";
+
+export {default as useUpdateTaskStatus} from "./api/hooks/useUpdateTaskStatus";

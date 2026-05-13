@@ -7,4 +7,6 @@ export {
     PriorityLabeled,
     type Tag,
     type TaskPaginationInfo,
+    type TaskStatusInterface,
+    type TaskStatusUpdate,
 } from "./model/task.model";
