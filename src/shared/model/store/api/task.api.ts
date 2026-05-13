@@ -2,7 +2,7 @@ import {createApi} from "@reduxjs/toolkit/query/react";
 import baseQueryWithErrorHandling from "@/shared/api/fetcher";
 import type {TaskResponse} from "@/shared/model/store/slices/task/task.model";
 import type {Pagination} from "@/shared/model/types/common";
-import type {Tag} from "@/entities/task";
+import type {Tag, Task, TaskStatusUpdate} from "@/entities/task";
 
 export const taskApi = createApi({
     reducerPath: 'taskApi',
@@ -23,8 +23,17 @@ export const taskApi = createApi({
                 url: "/api/task/tags",
                 method: "GET",
             })
+        }),
+        updateStatus: builder.mutation<Task, TaskStatusUpdate>({
+            query: ({ id, status }) => ({
+                url: `/api/task/status/${id}`,
+                method: "PATCH",
+                body: {
+                    status
+                }
+            })
         })
     })
 })
 
-export const { useLazyGetTasksQuery, useLazyGetTagsQuery } = taskApi
+export const { useLazyGetTasksQuery, useLazyGetTagsQuery, useUpdateStatusMutation } = taskApi
