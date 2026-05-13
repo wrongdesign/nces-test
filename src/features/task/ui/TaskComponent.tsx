@@ -3,7 +3,7 @@
 import {PriorityLabeled, type Tag, type Task, type TaskStatusType} from "@/entities/task";
 import {Button} from "@/shared/ui/button";
 import {cn} from "@/shared/model/utils/utils";
-import {Calendar, CalendarClock, CalendarSync} from "lucide-react";
+import {CalendarClock} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/shared/ui/tooltip";
 import {Badge} from "@/shared/ui/badge";
 import {StatusChange, useUpdateTaskStatus} from "@/features/task";
@@ -15,16 +15,16 @@ interface Props {
 const TaskComponent = ({
     title,
     description,
-    createdAt,
     status,
     tags,
     priority,
-    updatedAt,
     deadline,
     tagsList,
     id,
 }: Task & Props) => {
     const { updateTaskStatus, updateStatusLoading } = useUpdateTaskStatus();
+
+    const expiredDeadline: boolean = new Date() > new Date(deadline);
 
     const handleTaskDetailsOpen = () => {
 
@@ -32,7 +32,10 @@ const TaskComponent = ({
 
     return(
         <Button
-            className="flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none"
+            className={cn(
+                "flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none",
+                expiredDeadline && "border border-(--defaultRedColor) bg-(--defaultRedColor)/10 hover:bg-(--defaultRedColor)/5"
+            )}
             variant="secondary"
             onClick={handleTaskDetailsOpen}
             disabled={updateStatusLoading}
@@ -53,49 +56,19 @@ const TaskComponent = ({
 
             <p className="max-w-[90%] whitespace-pre-wrap">{description}</p>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 text-xs mb-4">
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <div className="flex items-center gap-1">
-                            <Calendar className="text-gray-600 dark:text-white" size={20} />
-                            <p className="text-sm leading-none text-gray-600 dark:text-white">
-                                {new Date(createdAt ?? '').toLocaleString()}
-                            </p>
-                        </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>Date of create</p>
-                    </TooltipContent>
-                </Tooltip>
-
-                {updatedAt && (
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <div className="flex items-center gap-1">
-                                <CalendarSync className="text-gray-600 dark:text-white" size={20} />
-                                <p className="text-sm text-gray-600 dark:text-white">{new Date(createdAt ?? '').toLocaleString()}</p>
-                            </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Date of update</p>
-                        </TooltipContent>
-                    </Tooltip>
-                )}
-
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <div className="flex items-center gap-1">
-                            <CalendarClock className="text-gray-600 dark:text-white" size={20} />
-                            <p className="text-sm leading-none text-gray-600 dark:text-white">
-                                {new Date(deadline ?? '').toLocaleString()}
-                            </p>
-                        </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>Deadline</p>
-                    </TooltipContent>
-                </Tooltip>
-            </div>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    <div className="flex items-center gap-1">
+                        <CalendarClock className="text-gray-600 dark:text-white" size={20} />
+                        <p className="text-sm leading-none text-gray-600 dark:text-white">
+                            {new Date(deadline ?? '').toLocaleString()}
+                        </p>
+                    </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>{`Deadline${expiredDeadline ? " is expired!" : ""}`}</p>
+                </TooltipContent>
+            </Tooltip>
 
             <div className="flex flex-row gap-2 flex-wrap">
                 {tags && tags.length > 0 && (
