@@ -51,6 +51,8 @@ export const PriorityLabeled: Record<PriorityType, StandardObjectWithClassNames>
     },
 };
 
+export const TaskStatusesArray = Object.values(TaskStatusEnum);
+
 export const StatusesLabeled: Record<TaskStatusType, StandardObjectWithStyles> = {
     todo: {
         label: 'Waiting',

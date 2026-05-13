@@ -1,12 +1,12 @@
 "use client"
 
-import {PriorityLabeled, type Tag, type Task, TaskStatusEnum} from "@/entities/task";
+import {PriorityLabeled, type Tag, type Task} from "@/entities/task";
 import {Button} from "@/shared/ui/button";
 import {cn} from "@/shared/model/utils/utils";
 import {Calendar, CalendarClock, CalendarSync} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/shared/ui/tooltip";
-import {StatusesLabeled} from "@/entities/task/model/task.model";
 import {Badge} from "@/shared/ui/badge";
+import {StatusChange} from "@/features/task";
 
 interface Props {
     tagsList: Tag[] | undefined;
@@ -34,12 +34,7 @@ const TaskComponent = ({
             onClick={handleTaskDetailsOpen}
         >
             <div className="flex flex-row w-full items-center justify-between mb-3">
-                <Badge className={cn(
-                    `px-2 py-1 rounded-lg text-xs font-semibold text-white`,
-                    StatusesLabeled[status ?? TaskStatusEnum.TODO]?.classNames
-                )}>
-                    {StatusesLabeled[status ?? TaskStatusEnum.TODO]?.label}
-                </Badge>
+                <StatusChange status={status} />
                 <Badge className={cn(
                     `px-2 py-1 rounded-lg text-xs font-semibold text-white`,
                     PriorityLabeled[priority]?.classNames
