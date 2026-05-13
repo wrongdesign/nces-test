@@ -7,7 +7,11 @@ import {
 import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/shared/model/store";
-import {setFetchTags, setFetchTasks, setPaginationInfo} from "@/shared/model/store/slices/task/task.slice";
+import {
+    setFetchTags,
+    setFetchTasks,
+    setPaginationInfo, setTasks,
+} from "@/shared/model/store/slices/task/task.slice";
 import {PAGINATION_LIMIT} from "@/features/task";
 
 const useGetTasks = () => {
@@ -36,6 +40,7 @@ const useGetTasks = () => {
 
     useEffect(() => {
         if (tasks) {
+            dispatch(setTasks(tasks.tasks));
             dispatch(setPaginationInfo({pagination: tasks?.pagination}));
             dispatch(setFetchTasks(false));
         }
@@ -48,7 +53,6 @@ const useGetTasks = () => {
     }, [tags, dispatch]);
 
     return {
-        tasks: tasks?.tasks,
         loading: tasksLoading || tagsLoading,
         tags: tags
     };

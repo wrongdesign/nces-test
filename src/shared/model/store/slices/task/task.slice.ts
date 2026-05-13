@@ -1,10 +1,11 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type {TaskPaginationResponse, TaskState} from "./task.model";
-import {Task} from "@/entities/task";
+import type {Task} from "@/entities/task";
 
 const initialState: TaskState = {
     fetchTags: true,
     fetchTasks: true,
+    tasks: undefined,
     pagination: undefined,
     selectedTask: undefined,
     currentPage: 1,
@@ -19,6 +20,16 @@ export const taskSlice = createSlice({
         },
         setFetchTasks: (state, action: PayloadAction<boolean>) => {
             state.fetchTasks = action.payload;
+        },
+        setTasks: (state, action: PayloadAction<Task[] | undefined>) => {
+            state.tasks = action.payload;
+        },
+        setUpdatedTask: (state, action: PayloadAction<Task>) => {
+            if (state.tasks) {
+                state.tasks = state.tasks.map((task) => task.id === action.payload.id ?
+                    { ...task, ...action.payload } : task
+                )
+            }
         },
         setPaginationInfo: (state, action: PayloadAction<TaskPaginationResponse>) => {
             state.pagination = action.payload.pagination;
@@ -41,6 +52,8 @@ export const {
     clearTasks,
     setSelectedTask,
     setCurrentPage,
+    setTasks,
+    setUpdatedTask,
     setFetchTasks,
     setFetchTags,
 } = taskSlice.actions;
