@@ -3,10 +3,12 @@
     "id": "task_1",
     "title": "Do something",
     "description": "Just do it man. Don't worry, just chill.",
-    "status": "todo",
+    "status": "done",
     "priority": "low",
     "deadline": "2026-09-12 12:00:00",
-    "tags": ["tag_frontend"],
+    "tags": [
+      "tag_frontend"
+    ],
     "createdAt": "2026-05-06 12:00:00",
     "updatedAt": "2026-05-08 12:00:00"
   },
@@ -14,10 +16,12 @@
     "id": "task_2",
     "title": "So hard task",
     "description": "Create CRUD for B2B platform and 3 microservices on Golang",
-    "status": "inProgress",
+    "status": "done",
     "priority": "medium",
     "deadline": "2026-09-12 12:00:00",
-    "tags": ["tag_backend"],
+    "tags": [
+      "tag_backend"
+    ],
     "createdAt": "2026-05-08 12:00:00",
     "updatedAt": "2026-05-10 12:00:00"
   },
@@ -28,7 +32,10 @@
     "status": "done",
     "priority": "high",
     "deadline": "2026-09-11 12:00:00",
-    "tags": ["tag_team", "tag_today"],
+    "tags": [
+      "tag_team",
+      "tag_today"
+    ],
     "createdAt": "2026-05-10 12:00:00",
     "updatedAt": "2026-05-12 12:00:00"
   }
