@@ -11,6 +11,6 @@ export interface TaskResponse extends TaskPaginationResponse {
 export interface TaskState extends TaskPaginationResponse {
     fetchTags: boolean;
     fetchTasks: boolean;
-    selectedTaskId: string | undefined;
+    selectedTask: Task | undefined;
     currentPage: number;
 }
