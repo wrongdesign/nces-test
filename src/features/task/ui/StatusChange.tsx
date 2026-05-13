@@ -8,9 +8,10 @@ import {Badge} from "@/shared/ui/badge";
 
 interface Props {
     status: TaskStatusType;
+    updateStatus: (data: TaskStatusType) => Promise<void>;
 }
 
-const StatusChange = ({ status }: Props) => {
+const StatusChange = ({ status, updateStatus }: Props) => {
     return(
         <DropdownMenu>
             <DropdownMenuTrigger asChild className="hover:scale-[1.1]">
@@ -23,7 +24,7 @@ const StatusChange = ({ status }: Props) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent sideOffset={8} align="end" className="border-0 bg-background/90 p-0">
                 {TaskStatusesArray.map((statusItem) => (
-                    <DropdownMenuItem key={statusItem} onClick={() => {}} className="defaultDropDownPoint">
+                    <DropdownMenuItem key={statusItem} onClick={async () => await updateStatus(statusItem)} className="defaultDropDownPoint">
                         {StatusesLabeled[statusItem ?? TaskStatusEnum.TODO]?.label}
                     </DropdownMenuItem>
                 ))}

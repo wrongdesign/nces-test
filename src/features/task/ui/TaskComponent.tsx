@@ -1,12 +1,12 @@
 "use client"
 
-import {PriorityLabeled, type Tag, type Task} from "@/entities/task";
+import {PriorityLabeled, type Tag, type Task, type TaskStatusType} from "@/entities/task";
 import {Button} from "@/shared/ui/button";
 import {cn} from "@/shared/model/utils/utils";
 import {Calendar, CalendarClock, CalendarSync} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/shared/ui/tooltip";
 import {Badge} from "@/shared/ui/badge";
-import {StatusChange} from "@/features/task";
+import {StatusChange, useUpdateTaskStatus} from "@/features/task";
 
 interface Props {
     tagsList: Tag[] | undefined;
@@ -21,8 +21,11 @@ const TaskComponent = ({
     priority,
     updatedAt,
     deadline,
-    tagsList
+    tagsList,
+    id,
 }: Task & Props) => {
+    const { updateTaskStatus, updateStatusLoading } = useUpdateTaskStatus();
+
     const handleTaskDetailsOpen = () => {
 
     }
@@ -32,9 +35,12 @@ const TaskComponent = ({
             className="flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none"
             variant="secondary"
             onClick={handleTaskDetailsOpen}
+            disabled={updateStatusLoading}
         >
             <div className="flex flex-row w-full items-center justify-between mb-3">
-                <StatusChange status={status} />
+                <StatusChange status={status} updateStatus={async (status: TaskStatusType) => {
+                    await updateTaskStatus({ id: id, status: status }).unwrap();
+                }} />
                 <Badge className={cn(
                     `px-2 py-1 rounded-lg text-xs font-semibold text-white`,
                     PriorityLabeled[priority]?.classNames
