@@ -32,11 +32,8 @@ const TaskComponent = ({
 
     return(
         <Button
-            className={cn(
-                "flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none",
-                expiredDeadline && "border border-(--defaultRedColor) bg-(--defaultRedColor)/10 hover:bg-(--defaultRedColor)/5"
-            )}
-            variant="secondary"
+            className="flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none"
+            variant={expiredDeadline ? "destructive" : "secondary"}
             onClick={handleTaskDetailsOpen}
             disabled={updateStatusLoading}
         >
@@ -54,7 +51,7 @@ const TaskComponent = ({
 
             <h3 className="font-bold text-gray-900 dark:text-white mb-2 text-[1.25rem] text-left">{title}</h3>
 
-            <p className="max-w-[90%] whitespace-pre-wrap">{description}</p>
+            <p className="max-w-[90%] whitespace-pre-wrap text-gray-600 dark:text-white">{description}</p>
 
             <Tooltip>
                 <TooltipTrigger asChild>
