@@ -44,9 +44,6 @@ const Logout = () => {
                 <LogOut
                     className="group-hover:text-(--defaultRedColor) group-hover:stroke-(--defaultRedColor) size-5"
                 />
-                <p className="text-sm leading-none font-medium  group-hover:text-(--defaultRedColor)">
-                    Logout
-                </p>
             </Button>
             {isPending && <LoaderComponent />}
         </>

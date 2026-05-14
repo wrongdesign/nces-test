@@ -19,8 +19,6 @@ const ThemeToggle = () => {
         setTheme(nextTheme);
     };
 
-    const textBySchema = theme === UserTheme.LIGHT ? 'Light mode' : 'Dark mode';
-
     return (
         <Button
             onClick={toggleTheme}
@@ -28,7 +26,6 @@ const ThemeToggle = () => {
             className="cursor-pointer"
         >
             <Icon as={THEME_ICONS[currentTheme]} className="size-5" />
-            <p className="text-sm">{textBySchema}</p>
         </Button>
     );
 }
