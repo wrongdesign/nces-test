@@ -13,6 +13,7 @@ import LoaderComponent from "@/shared/ui/LoaderComponent";
 
 interface Props {
     tagsList: Tag[] | undefined;
+    setTag: (tag: string | undefined) => void;
 }
 
 const TaskComponent = ({
@@ -24,6 +25,7 @@ const TaskComponent = ({
     deadline,
     tagsList,
     id,
+    setTag,
 }: Task & Props) => {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
@@ -76,7 +78,16 @@ const TaskComponent = ({
             <div className="flex flex-row gap-2 flex-wrap">
                 {tags && tags.length > 0 && (
                     tags.map((tag) => (
-                        <Badge key={tag}  variant="default">
+                        <Badge
+                            key={tag}
+                            className="hover:scale-[1.1]"
+                            variant="default"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setTag(tag);
+                                console.log("HERE");
+                            }}
+                        >
                             {tagsList?.find((tagObject) => tagObject.id === tag)?.name ?? tag}
                         </Badge>
                     ))
