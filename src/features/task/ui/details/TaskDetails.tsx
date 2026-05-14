@@ -29,8 +29,8 @@ const TaskDetails = ({ mainDisabler, taskMode }: Props) => {
                             {submitButtonText}
                         </Button>
                     )}
-                    {(task?.status === TaskStatusEnum.INPROGRESS || task?.status === TaskStatusEnum.DONE) && (
-                        <Button className="defaultButton" onClick={() => {}}>
+                    {(task?.status !== TaskStatusEnum.DONE) && (
+                        <Button variant="destructive" className="cursor-pointer" onClick={() => {}}>
                             Close task
                         </Button>
                     )}
