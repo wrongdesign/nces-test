@@ -20,6 +20,7 @@ const useGetTasks = () => {
     const currentPage = useAppSelector(state => state.task.currentPage);
     const fetchTasks = useAppSelector(state => state.task.fetchTasks);
     const fetchTags = useAppSelector(state => state.task.fetchTags);
+    const filters = useAppSelector(state => state.task.filters);
 
     const [getTasks, {data: tasks, isLoading: tasksLoading, error: getTasksError}] = useLazyGetTasksQuery();
     const [getTags, {data: tags, isLoading: tagsLoading, error: getTagsError}] = useLazyGetTagsQuery();
@@ -28,9 +29,9 @@ const useGetTasks = () => {
 
     useEffect(() => {
         if (fetchTasks) {
-            getTasks({page: currentPage, limit: PAGINATION_LIMIT}).unwrap();
+            getTasks({page: currentPage, limit: PAGINATION_LIMIT, ...filters}).unwrap();
         }
-    }, [fetchTasks, getTasks, currentPage]);
+    }, [fetchTasks, getTasks, currentPage, filters]);
 
     useEffect(() => {
         if (fetchTags) {
@@ -41,7 +42,7 @@ const useGetTasks = () => {
     useEffect(() => {
         if (tasks) {
             dispatch(setTasks(tasks.tasks));
-            dispatch(setPaginationInfo({pagination: tasks?.pagination}));
+            dispatch(setPaginationInfo({ pagination: tasks?.pagination }));
             dispatch(setFetchTasks(false));
         }
     }, [tasks, dispatch]);
