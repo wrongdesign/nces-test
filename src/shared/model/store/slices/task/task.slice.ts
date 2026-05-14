@@ -1,11 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type {TaskPaginationResponse, TaskState} from "./task.model";
+import type {TaskFiltersModel, TaskPaginationResponse, TaskState} from "./task.model";
 import type {Task} from "@/entities/task";
 
 const initialState: TaskState = {
     fetchTags: true,
     fetchTasks: true,
     tasks: undefined,
+    filters: undefined,
     pagination: undefined,
     selectedTask: undefined,
     currentPage: 1,
@@ -23,6 +24,11 @@ export const taskSlice = createSlice({
         },
         setTasks: (state, action: PayloadAction<Task[] | undefined>) => {
             state.tasks = action.payload;
+        },
+        setFilters: (state, action: PayloadAction<Partial<TaskFiltersModel>>) => {
+            state.filters = action.payload;
+            state.fetchTasks = true;
+            state.fetchTags = true;
         },
         setUpdatedTask: (state, action: PayloadAction<Task>) => {
             if (state.tasks) {
@@ -53,6 +59,7 @@ export const {
     setSelectedTask,
     setCurrentPage,
     setTasks,
+    setFilters,
     setUpdatedTask,
     setFetchTasks,
     setFetchTags,
