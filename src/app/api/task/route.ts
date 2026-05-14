@@ -9,8 +9,8 @@ export async function GET(request: NextRequest) {
 
         const page = Number(searchParams.get("page")) ?? undefined
         const limit = Number(searchParams.get("limit")) ?? undefined
-        const status: TaskStatusType | undefined = searchParams.get("status") as TaskStatusType
-        const priority: PriorityType | undefined = searchParams.get("priority") as PriorityType
+        const status: TaskStatusType | undefined = searchParams.get("status") as TaskStatusType ?? undefined
+        const priority: PriorityType | undefined = searchParams.get("priority") as PriorityType ?? undefined
         const tag: string | undefined = searchParams.get("tag") ?? undefined
 
         const mockTasks: Task[] = readFile("src/app/api/task/mocks/tasks.json");
@@ -33,35 +33,35 @@ export async function GET(request: NextRequest) {
             }
         )
 
-        const filteredTasks = sortedTasks.filter(() => {
+        const filteredTasks = () => {
             const filterByStatus = status ? sortedTasks.filter((task: Task) => task.status === status) : sortedTasks;
-
             const filterByPriority = priority ? filterByStatus.filter((task: Task) => task.priority === priority) : filterByStatus;
-
             return tag ? filterByPriority.filter((task: Task) => task.tags.includes(tag)) : filterByPriority;
-        })
+        }
+
+        const filteredTasksResult = filteredTasks();
 
         const startIndex = (page - 1) * limit
 
         const endIndex = startIndex + limit
 
         const paginatedTasks = page && limit ?
-            filteredTasks.slice(
+            filteredTasksResult.slice(
                 startIndex,
                 endIndex
-            ) : filteredTasks;
+            ) : filteredTasksResult;
 
         return NextResponse.json({
             tasks: paginatedTasks,
 
             ...(page && limit && {
                 pagination: {
-                    total: filteredTasks.length,
+                    total: filteredTasksResult.length,
                     totalPages: Math.ceil(
-                        filteredTasks.length / limit
+                        filteredTasksResult.length / limit
                     ),
                     hasNextPage:
-                        endIndex < filteredTasks.length,
+                        endIndex < filteredTasksResult.length,
                     hasPrevPage: page > 1,
                 }
             }),
