@@ -1,1 +1,1 @@
-export const PAGINATION_LIMIT = 10;
+export const PAGINATION_LIMIT_ARRAY: number[] = [10, 25, 50, 100];

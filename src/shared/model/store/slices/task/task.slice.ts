@@ -5,6 +5,8 @@ import type {
     TaskState
 } from "./task.model";
 import {type Task, TaskSortingEnum} from "@/entities/task";
+import {PAGINATION_LIMIT_ARRAY} from "@/features/task";
+import type {Pagination} from "@/shared/model/types/common";
 
 const initialState: TaskState = {
     fetchTags: true,
@@ -15,7 +17,10 @@ const initialState: TaskState = {
     },
     pagination: undefined,
     selectedTask: undefined,
-    currentPage: 1,
+    currentPagination: {
+        page: 1,
+        limit: PAGINATION_LIMIT_ARRAY[0],
+    },
 }
 
 export const taskSlice = createSlice({
@@ -33,8 +38,7 @@ export const taskSlice = createSlice({
         },
         setFilters: (state, action: PayloadAction<Partial<TaskFiltersModel>>) => {
             state.filters = { ...state.filters, ...action.payload };
-            state.fetchTasks = true;
-            state.fetchTags = true;
+            state.currentPagination = { ...state.currentPagination, page: 1 };
         },
         setUpdatedTask: (state, action: PayloadAction<Task>) => {
             if (state.tasks) {
@@ -46,8 +50,8 @@ export const taskSlice = createSlice({
         setPaginationInfo: (state, action: PayloadAction<TaskPaginationResponse>) => {
             state.pagination = action.payload.pagination;
         },
-        setCurrentPage: (state, action: PayloadAction<number>) => {
-            state.currentPage = action.payload;
+        setCurrentPagination: (state, action: PayloadAction<Pagination>) => {
+            state.currentPagination = action.payload;
             state.fetchTasks = true;
         },
         setSelectedTask: (state, action: PayloadAction<Task | undefined>) => {
@@ -63,7 +67,7 @@ export const {
     setPaginationInfo,
     clearTasks,
     setSelectedTask,
-    setCurrentPage,
+    setCurrentPagination,
     setTasks,
     setFilters,
     setUpdatedTask,
