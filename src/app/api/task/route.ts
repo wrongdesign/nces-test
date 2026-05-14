@@ -1,7 +1,13 @@
 import {type NextRequest, NextResponse} from "next/server";
 import {INTERNAL_ERROR} from "@/app/api/config/common";
 import {readFile} from "@/app/api/task/utils/common";
-import type {PriorityType, Task, TaskStatusType} from "@/entities/task";
+import {
+    type PriorityType,
+    type Task,
+    TaskSortingEnum,
+    type TaskSortingType,
+    type TaskStatusType
+} from "@/entities/task";
 
 export async function GET(request: NextRequest) {
     try {
@@ -12,31 +18,36 @@ export async function GET(request: NextRequest) {
         const status: TaskStatusType | undefined = searchParams.get("status") as TaskStatusType ?? undefined
         const priority: PriorityType | undefined = searchParams.get("priority") as PriorityType ?? undefined
         const tag: string | undefined = searchParams.get("tag") ?? undefined
+        const name: string | undefined = searchParams.get("name") ?? undefined
+        const sorting: TaskSortingType | undefined = searchParams.get("sorting") as TaskSortingType ?? undefined
 
         const mockTasks: Task[] = readFile("src/app/api/task/mocks/tasks.json");
+
+        const fieldSelect = sorting === TaskSortingEnum.DEADLINE ? "deadline" : "createdAt";
 
         const sortedTasks = [...mockTasks].sort(
             (a, b) => {
                 const dateA = new Date(
-                    a.createdAt
+                    a[fieldSelect]
                         .split(".")[0]
                         .replace(" ", "T")
                 ).getTime()
 
                 const dateB = new Date(
-                    b.createdAt
+                    b[fieldSelect]
                         .split(".")[0]
                         .replace(" ", "T")
                 ).getTime()
 
-                return dateB - dateA
+                return fieldSelect === TaskSortingEnum.CREATED_AT ? dateB - dateA : dateA - dateB;
             }
         )
 
         const filteredTasks = () => {
             const filterByStatus = status ? sortedTasks.filter((task: Task) => task.status === status) : sortedTasks;
             const filterByPriority = priority ? filterByStatus.filter((task: Task) => task.priority === priority) : filterByStatus;
-            return tag ? filterByPriority.filter((task: Task) => task.tags.includes(tag)) : filterByPriority;
+            const filterByTag = tag ? filterByPriority.filter((task: Task) => task.tags.includes(tag)) : filterByPriority;
+            return name ? filterByTag.filter((task: Task) => task.title.toLowerCase().includes(name.toLowerCase())) : filterByTag;
         }
 
         const filteredTasksResult = filteredTasks();
