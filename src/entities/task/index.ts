@@ -11,5 +11,11 @@ export {
     type TaskStatusUpdate,
     TaskMode,
     type TaskModeType,
-    type PriorityArray,
+    PriorityArray,
+    type TaskSortingType,
+    TaskSortingEnum,
+    TaskStatusesArray,
+    StatusesLabeled,
+    TaskSortingLabeled,
+    TaskSortingArray,
 } from "./model/task.model";
