@@ -1,9 +1,8 @@
 "use client"
 
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/shared/ui/dropdown-menu";
-import {TaskStatusEnum, type TaskStatusType} from "@/entities/task";
+import {StatusesLabeled, TaskStatusEnum, TaskStatusesArray, type TaskStatusType} from "@/entities/task";
 import {cn} from "@/shared/model/utils/utils";
-import {StatusesLabeled, TaskStatusesArray} from "@/entities/task/model/task.model";
 import {Badge} from "@/shared/ui/badge";
 
 interface Props {

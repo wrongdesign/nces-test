@@ -1,12 +1,18 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type {TaskFiltersModel, TaskPaginationResponse, TaskState} from "./task.model";
-import type {Task} from "@/entities/task";
+import type {
+    TaskFiltersModel,
+    TaskPaginationResponse,
+    TaskState
+} from "./task.model";
+import {type Task, TaskSortingEnum} from "@/entities/task";
 
 const initialState: TaskState = {
     fetchTags: true,
     fetchTasks: true,
     tasks: undefined,
-    filters: undefined,
+    filters: {
+        sorting: TaskSortingEnum.CREATED_AT
+    },
     pagination: undefined,
     selectedTask: undefined,
     currentPage: 1,
@@ -26,7 +32,7 @@ export const taskSlice = createSlice({
             state.tasks = action.payload;
         },
         setFilters: (state, action: PayloadAction<Partial<TaskFiltersModel>>) => {
-            state.filters = action.payload;
+            state.filters = { ...state.filters, ...action.payload };
             state.fetchTasks = true;
             state.fetchTags = true;
         },

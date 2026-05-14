@@ -3,7 +3,7 @@ import {TaskList} from "@/features/task";
 
 const DashboardPage = () => {
     return(
-        <DefaultBlock>
+        <DefaultBlock customClassName="w-full!">
             <TaskList />
         </DefaultBlock>
     );

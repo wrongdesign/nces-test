@@ -9,7 +9,7 @@ export const taskApi = createApi({
     baseQuery: baseQueryWithErrorHandling,
     endpoints: (builder) => ({
         getTasks: builder.query<TaskResponse, Partial<Pagination & TaskFiltersModel>>({
-            query: ({ page, limit, tag, status, priority }) => ({
+            query: ({ page, limit, tag, status, priority, sorting, name }) => ({
                 url: "/api/task",
                 method: "GET",
                 params: {
@@ -17,7 +17,9 @@ export const taskApi = createApi({
                     limit,
                     tag,
                     status,
-                    priority
+                    priority,
+                    sorting,
+                    name,
                 },
             })
         }),

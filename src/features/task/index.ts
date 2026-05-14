@@ -9,3 +9,6 @@ export {default as useUpdateTaskStatus} from "./api/hooks/useUpdateTaskStatus";
 export {default as TaskDetails} from "./ui/details/TaskDetails";
 export {default as TaskDetailsInfoForm} from "./ui/details/TaskDetailsInfoForm";
 export {default as FiltersBlock} from "./ui/filters/FiltersBlock";
+export {default as SelectFiltersList} from "./ui/filters/SelectFiltersList";
+export {default as SearchByName} from "./ui/filters/SearchByName";
+export {default as SortingComponent} from "./ui/filters/SortingComponent";
