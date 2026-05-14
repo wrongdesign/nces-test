@@ -3,7 +3,7 @@
 import useGetTasks from "@/features/task/api/hooks/useGetTasks";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {useAppDispatch, useAppSelector} from "@/shared/model/store";
-import {FiltersBlock, TaskComponent} from "@/features/task";
+import {FiltersBlock, TaskComponent, TaskPagination} from "@/features/task";
 import {useEffect} from "react";
 import {setFetchTags, setFetchTasks, setFilters} from "@/shared/model/store/slices/task/task.slice";
 
@@ -19,8 +19,6 @@ const TaskList = () => {
         dispatch(setFetchTasks(true));
         dispatch(setFetchTags(true));
     }, [dispatch]);
-
-    console.log(filters);
 
     return(
         <div className="flex flex-col gap-2 w-full!">
@@ -40,6 +38,8 @@ const TaskList = () => {
                 )}
                 {loading && <LoaderComponent fixed={true} />}
             </div>
+
+            <TaskPagination />
         </div>
 
     );

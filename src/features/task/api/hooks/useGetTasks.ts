@@ -12,12 +12,11 @@ import {
     setFetchTasks,
     setPaginationInfo, setTasks,
 } from "@/shared/model/store/slices/task/task.slice";
-import {PAGINATION_LIMIT} from "@/features/task";
 
 const useGetTasks = () => {
     const dispatch = useAppDispatch();
 
-    const currentPage = useAppSelector(state => state.task.currentPage);
+    const currentPagination = useAppSelector(state => state.task.currentPagination);
     const fetchTasks = useAppSelector(state => state.task.fetchTasks);
     const fetchTags = useAppSelector(state => state.task.fetchTags);
     const filters = useAppSelector(state => state.task.filters);
@@ -29,9 +28,9 @@ const useGetTasks = () => {
 
     useEffect(() => {
         if (fetchTasks) {
-            getTasks({page: currentPage, limit: PAGINATION_LIMIT, ...filters}).unwrap();
+            getTasks({ ...currentPagination, ...filters}).unwrap();
         }
-    }, [fetchTasks, getTasks, currentPage, filters]);
+    }, [fetchTasks, getTasks, currentPagination, filters]);
 
     useEffect(() => {
         if (fetchTags) {
