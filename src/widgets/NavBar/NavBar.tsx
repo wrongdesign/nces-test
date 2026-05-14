@@ -7,6 +7,7 @@ import Image from "next/image";
 import Logout from "@/widgets/Logout/Logout";
 import ThemeToggle from "@/widgets/ThemeToggle/ThemeToggle";
 import DefaultBlock from "@/shared/ui/DefaultBlock";
+import NavMenu from "@/widgets/NavMenu/NavMenu";
 
 const NavBar = () => {
     const router = useRouter();
@@ -31,7 +32,7 @@ const NavBar = () => {
                 </DefaultBlock>
 
                 <DefaultBlock>
-                    {/*{finalMenuItemsList}*/}
+                    <NavMenu />
                 </DefaultBlock>
 
                 <DefaultBlock>
