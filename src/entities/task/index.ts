@@ -9,4 +9,6 @@ export {
     type TaskPaginationInfo,
     type TaskStatusInterface,
     type TaskStatusUpdate,
+    TaskMode,
+    type TaskModeType,
 } from "./model/task.model";

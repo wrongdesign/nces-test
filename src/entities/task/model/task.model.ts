@@ -96,3 +96,10 @@ export interface TaskPaginationInfo {
     hasNextPage: boolean;
     hasPrevPage: boolean;
 }
+
+export enum TaskMode {
+    CREATE = 'create',
+    WORKING = 'working',
+}
+
+export type TaskModeType = `${TaskMode}`;
