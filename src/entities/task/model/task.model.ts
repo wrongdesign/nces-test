@@ -58,6 +58,8 @@ export const PriorityLabeled: Record<PriorityType, StandardObjectWithClassNames>
     },
 };
 
+export const PriorityArray = Object.values(PriorityEnum);
+
 export const TaskStatusesArray = Object.values(TaskStatusEnum);
 
 export const StatusesLabeled: Record<TaskStatusType, StandardObjectWithStyles> = {

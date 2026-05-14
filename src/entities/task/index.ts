@@ -11,4 +11,5 @@ export {
     type TaskStatusUpdate,
     TaskMode,
     type TaskModeType,
+    type PriorityArray,
 } from "./model/task.model";

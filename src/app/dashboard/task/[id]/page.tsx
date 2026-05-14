@@ -3,6 +3,7 @@
 import DefaultBlock from "@/shared/ui/DefaultBlock";
 import BackButton from "@/widgets/BackButton/BackButton";
 import {TaskDetails} from "@/features/task";
+import {TaskMode} from "@/entities/task";
 
 const TaskDetailsPage = ({id}: {id: string}) => {
     console.log(id);
@@ -14,7 +15,7 @@ const TaskDetailsPage = ({id}: {id: string}) => {
                 <p className="text-2xl leading-none">Task Details</p>
             </div>
 
-            <TaskDetails mainDisabler={false} taskMode={"create"} />
+            <TaskDetails mainDisabler={false} taskMode={TaskMode.WORKING} />
         </DefaultBlock>
     );
 }
