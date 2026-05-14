@@ -1,4 +1,4 @@
-import type {StandardObjectWithClassNames, StandardObjectWithStyles} from "@/shared/model/types/common";
+import type {StandardObject, StandardObjectWithClassNames, StandardObjectWithStyles} from "@/shared/model/types/common";
 
 export enum TaskStatusEnum {
     TODO = "todo",
@@ -89,6 +89,26 @@ export const StatusesLabeled: Record<TaskStatusType, StandardObjectWithStyles> =
             backgroundColor: '#459a00',
         },
         classNames: 'bg-[#459a00]',
+    },
+};
+
+export enum TaskSortingEnum {
+    CREATED_AT = "createdAt",
+    DEADLINE = "deadline",
+}
+
+export type TaskSortingType = `${TaskSortingEnum}`;
+
+export const TaskSortingArray = Object.values(TaskSortingEnum);
+
+export const TaskSortingLabeled: Record<TaskSortingType, StandardObject> = {
+    createdAt: {
+        label: 'Sort by created at date',
+        code: TaskSortingEnum.CREATED_AT,
+    },
+    deadline: {
+        label: 'Sort by deadline date',
+        code: TaskSortingEnum.DEADLINE,
     },
 };
 
