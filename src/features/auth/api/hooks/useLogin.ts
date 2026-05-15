@@ -1,6 +1,6 @@
 "use client"
 
-import {AuthFormType} from "@/features/auth";
+import type {AuthFormType} from "@/features/auth";
 import {useLoginMutation} from "@/shared/model/store/api/auth.api";
 import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
 import {useTransition} from "react";
@@ -22,7 +22,7 @@ const useLogin = () => {
                 router.push("/otp");
             })
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 

@@ -27,7 +27,6 @@ export const taskSchema = taskStatusSchema.extend({
             message:
                 "At least one tag is required",
         }),
-    status: z.enum(TaskStatusEnum, "Select 1 of status"),
 })
 
 export type TaskSchemaType = z.infer<typeof taskSchema>

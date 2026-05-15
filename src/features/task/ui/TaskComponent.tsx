@@ -85,7 +85,6 @@ const TaskComponent = ({
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setTag(tag);
-                                console.log("HERE");
                             }}
                         >
                             {tagsList?.find((tagObject) => tagObject.id === tag)?.name ?? tag}

@@ -5,8 +5,7 @@ import BackButton from "@/widgets/BackButton/BackButton";
 import {TaskDetails} from "@/features/task";
 import {TaskMode} from "@/entities/task";
 
-const TaskDetailsPage = ({id}: {id: string}) => {
-    console.log(id);
+const TaskDetailsPage = ({ id }: {id: string}) => {
     return(
         <DefaultBlock customClassName="flex flex-col gap-4">
             <div className="flex flex-row flex-wrap gap-10 w-full items-center justify-start">

@@ -10,7 +10,7 @@ import {useAppDispatch, useAppSelector} from "@/shared/model/store";
 import {
     setFetchTags,
     setFetchTasks,
-    setPaginationInfo, setTasks,
+    setPaginationInfo, setTags, setTasks,
 } from "@/shared/model/store/slices/task/task.slice";
 
 const useGetTasks = () => {
@@ -49,6 +49,7 @@ const useGetTasks = () => {
     useEffect(() => {
         if (tags) {
             dispatch(setFetchTags(false));
+            dispatch(setTags(tags));
         }
     }, [tags, dispatch]);
 

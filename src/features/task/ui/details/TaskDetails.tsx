@@ -17,13 +17,13 @@ const TaskDetails = ({ mainDisabler, taskMode }: Props) => {
         <div className="flex flex-col gap-4 w-full!">
             <TaskDetailsInfoForm />
 
-            <div className={'flex justify-end w-full!'}>
-                {(task?.status !== TaskStatusEnum.DONE) && (
+            {(task?.status !== TaskStatusEnum.DONE) && taskMode !== TaskMode.CREATE && (
+                <div className={'flex justify-end w-full!'}>
                     <Button variant="destructive" className="cursor-pointer" onClick={() => {}}>
                         Close task
                     </Button>
-                )}
-            </div>
+                </div>
+            )}
 
             {/* TODO: Place here logic for comments and history*/}
             {/*{taskMode === TaskMode.WORKING }*/}
