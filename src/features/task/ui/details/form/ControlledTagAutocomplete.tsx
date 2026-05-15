@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react";
 import {X, Check} from "lucide-react";
 
 import { Badge } from "@/shared/ui/badge";
@@ -23,7 +22,7 @@ import {useState} from "react";
 import type {Tag} from "@/entities/task";
 import {useAppSelector} from "@/shared/model/store";
 import {Controller, type FieldError, type FieldValues} from "react-hook-form";
-import type {CreateTaskForm} from "@/features/task";
+import {type CreateTaskForm, useCreateTag} from "@/features/task";
 
 const ControlledTagAutocomplete = <T extends FieldValues>({ control, errors, name }: CreateTaskForm<T>) => {
     const tagsList = useAppSelector(state => state.task.tags);
@@ -33,6 +32,8 @@ const ControlledTagAutocomplete = <T extends FieldValues>({ control, errors, nam
     const filteredTags = tagsList?.filter((tag) =>
         tag.name.toLowerCase().includes(search.toLowerCase())
     );
+
+    const { handleCreateTag, createTagLoading } = useCreateTag();
 
     return (
         <Controller
@@ -94,14 +95,30 @@ const ControlledTagAutocomplete = <T extends FieldValues>({ control, errors, nam
                                 <PopoverContent className="p-0">
                                     <Command>
                                         <CommandInput
-                                            placeholder="Search tags..."
+                                            placeholder="Search tags or type for create..."
                                             value={search}
                                             onValueChange={setSearch}
                                         />
 
                                         <CommandList>
-                                            <CommandEmpty>
+                                            <CommandEmpty className={"flex flex-col gap-1 items-center"}>
                                                 No tags found
+
+                                                {search.trim() && (
+                                                    <Button
+                                                        size="sm"
+                                                        variant="default"
+                                                        disabled={createTagLoading}
+                                                        onClick={async () => {
+                                                            await handleCreateTag({name: search});
+
+                                                            setSearch("");
+                                                        }}
+                                                        className={"cursor-pointer w-fit"}
+                                                    >
+                                                        Create "{search}"
+                                                    </Button>
+                                                )}
                                             </CommandEmpty>
 
                                             <CommandGroup>
