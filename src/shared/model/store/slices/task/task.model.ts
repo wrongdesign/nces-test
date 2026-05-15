@@ -1,4 +1,4 @@
-import type {PriorityType, Task, TaskPaginationInfo, TaskSortingType, TaskStatusType} from "@/entities/task";
+import type {PriorityType, Tag, Task, TaskPaginationInfo, TaskSortingType, TaskStatusType} from "@/entities/task";
 import type {Pagination} from "@/shared/model/types/common";
 
 export interface TaskPaginationResponse {
@@ -24,4 +24,5 @@ export interface TaskState extends TaskPaginationResponse {
     filters: Partial<TaskFiltersModel>;
     selectedTask: Task | undefined;
     currentPagination: Pagination;
+    tags: Tag[] | undefined;
 }

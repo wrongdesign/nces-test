@@ -4,7 +4,7 @@ import type {
     TaskPaginationResponse,
     TaskState
 } from "./task.model";
-import {type Task, TaskSortingEnum} from "@/entities/task";
+import {type Tag, type Task, TaskSortingEnum} from "@/entities/task";
 import {PAGINATION_LIMIT_ARRAY} from "@/features/task";
 import type {Pagination} from "@/shared/model/types/common";
 
@@ -21,6 +21,7 @@ const initialState: TaskState = {
         page: 1,
         limit: PAGINATION_LIMIT_ARRAY[0],
     },
+    tags: undefined,
 }
 
 export const taskSlice = createSlice({
@@ -39,6 +40,9 @@ export const taskSlice = createSlice({
         setFilters: (state, action: PayloadAction<Partial<TaskFiltersModel>>) => {
             state.filters = { ...state.filters, ...action.payload };
             state.currentPagination = { ...state.currentPagination, page: 1 };
+        },
+        setTags: (state, action: PayloadAction<Tag[] | undefined>) => {
+            state.tags = action.payload;
         },
         setUpdatedTask: (state, action: PayloadAction<Task>) => {
             if (state.tasks) {
@@ -73,5 +77,6 @@ export const {
     setUpdatedTask,
     setFetchTasks,
     setFetchTags,
+    setTags,
 } = taskSlice.actions;
 export default taskSlice.reducer;
