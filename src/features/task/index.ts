@@ -13,3 +13,7 @@ export {default as SelectFiltersList} from "./ui/filters/SelectFiltersList";
 export {default as SearchByName} from "./ui/filters/SearchByName";
 export {default as SortingComponent} from "./ui/filters/SortingComponent";
 export {default as TaskPagination} from "./ui/TaskPagination";
+
+export {type TaskSchemaType, taskSchema} from "./model/schemas/details.schema";
+
+export {default as useTaskCreate} from "./api/hooks/useTaskCreate";
