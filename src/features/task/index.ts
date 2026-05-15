@@ -7,6 +7,8 @@ export {default as useGetTasks} from "./api/hooks/useGetTasks";
 export {default as useTaskCreate} from "./api/hooks/useTaskCreate";
 export {default as useGetTags} from "./api/hooks/useGetTags";
 export {default as useUpdateTaskStatus} from "./api/hooks/useUpdateTaskStatus";
+export {default as useTaskUpdate} from "./api/hooks/useTaskUpdate";
+export {default as useCreateTag} from "./api/hooks/useCreateTag";
 
 export {default as TaskList} from "./ui/TaskList";
 export {default as StatusChange} from "./ui/StatusChange";

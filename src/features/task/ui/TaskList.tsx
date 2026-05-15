@@ -1,9 +1,8 @@
 "use client"
 
-import useGetTasks from "@/features/task/api/hooks/useGetTasks";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {useAppDispatch, useAppSelector} from "@/shared/model/store";
-import {FiltersBlock, TaskComponent, TaskPagination, useGetTags} from "@/features/task";
+import {FiltersBlock, TaskComponent, TaskPagination, useGetTags, useGetTasks} from "@/features/task";
 import {useEffect} from "react";
 import {setFetchTags, setFetchTasks, setFilters} from "@/shared/model/store/slices/task/task.slice";
 

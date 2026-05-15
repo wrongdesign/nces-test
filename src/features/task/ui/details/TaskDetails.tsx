@@ -1,23 +1,19 @@
 "use client"
 
 import {Button} from "@/shared/ui/button";
-import {useAppSelector} from "@/shared/model/store";
-import {TaskMode, type TaskModeType, TaskStatusEnum} from "@/entities/task";
+import {TaskMode, type TaskModeType} from "@/entities/task";
 import {TaskDetailsInfoForm} from "@/features/task";
 
 interface Props {
-    mainDisabler: boolean;
     taskMode: TaskModeType;
 }
 
-const TaskDetails = ({ mainDisabler, taskMode }: Props) => {
-    const task = useAppSelector((state) => state.task.selectedTask);
-
+const TaskDetails = ({ taskMode }: Props) => {
     return(
         <div className="flex flex-col gap-4 w-full!">
             <TaskDetailsInfoForm />
 
-            {(task?.status !== TaskStatusEnum.DONE) && taskMode !== TaskMode.CREATE && (
+            {taskMode !== TaskMode.CREATE && (
                 <div className={'flex justify-end w-full!'}>
                     <Button variant="destructive" className="cursor-pointer" onClick={() => {}}>
                         Close task
@@ -25,8 +21,6 @@ const TaskDetails = ({ mainDisabler, taskMode }: Props) => {
                 </div>
             )}
 
-            {/* TODO: Place here logic for comments and history*/}
-            {/*{taskMode === TaskMode.WORKING }*/}
         </div>
     );
 }

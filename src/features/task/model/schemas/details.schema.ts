@@ -22,7 +22,7 @@ export const taskSchema = taskStatusSchema.extend({
             message: 'Invalid date format',
         }),
     tags: z
-        .array(z.string())
+        .array(z.string(), "Tags is required")
         .min(1, {
             message:
                 "At least one tag is required",

@@ -1,4 +1,4 @@
-import {LayoutDashboard, UserPen} from "lucide-react";
+import {LayoutDashboard, SquarePlus} from "lucide-react";
 import type {INavMenuItem} from "@/widgets/NavMenu/types/types";
 
 export const menus: INavMenuItem[] = [
@@ -8,13 +8,13 @@ export const menus: INavMenuItem[] = [
         icon: "LayoutDashboard",
     },
     {
-        text: "Profile",
-        location: "/dashboard/profile",
-        icon: "UserPen",
+        text: "Create task",
+        location: "/dashboard/create-task",
+        icon: "SquarePlus",
     },
 ];
 
 export const iconMap = {
     LayoutDashboard: LayoutDashboard,
-    UserPen: UserPen,
+    SquarePlus: SquarePlus,
 };

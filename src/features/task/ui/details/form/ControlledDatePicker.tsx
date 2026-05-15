@@ -3,7 +3,6 @@
 import {Controller, type FieldError, type FieldValues} from "react-hook-form";
 import type {CreateTaskForm} from "@/features/task";
 import {Label} from "@/shared/ui/label";
-import type React from "react";
 import {Popover, PopoverContent, PopoverTrigger} from "@/shared/ui/popover";
 import {Button} from "@/shared/ui/button";
 import {CalendarIcon} from "lucide-react";
@@ -30,7 +29,7 @@ const ControlledDatePicker = <T extends FieldValues>({ control, errors, name, la
                                             variant="outline"
                                             data-empty={!value}
                                             onBlur={onBlur}
-                                            className="justify-start text-left font-normal data-[empty=true]:text-muted-foreground"
+                                            className="justify-start text-left font-normal data-[empty=true]:text-muted-foreground cursor-pointer"
                                         >
                                             <CalendarIcon />
                                             {value ? formatDate(value, 'sv-SE', 'string') : <span>Pick date</span>}
