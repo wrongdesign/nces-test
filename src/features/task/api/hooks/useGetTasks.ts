@@ -5,6 +5,7 @@ import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/shared/model/store";
 import {
+    setFetchTags,
     setFetchTasks,
     setPaginationInfo,
     setTasks,
@@ -23,7 +24,7 @@ const useGetTasks = () => {
 
     useEffect(() => {
         if (fetchTasks) {
-            getTasks({ ...currentPagination, ...filters}).unwrap();
+            getTasks({ ...currentPagination, ...filters }).unwrap();
         }
     }, [fetchTasks, getTasks, currentPagination, filters]);
 
@@ -32,6 +33,7 @@ const useGetTasks = () => {
             dispatch(setTasks(tasks.tasks));
             dispatch(setPaginationInfo({ pagination: tasks?.pagination }));
             dispatch(setFetchTasks(false));
+            dispatch(setFetchTags(true));
         }
     }, [tasks, dispatch]);
 
