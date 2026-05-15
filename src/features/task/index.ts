@@ -3,9 +3,13 @@ export {default as TaskComponent} from "./ui/TaskComponent";
 export { PAGINATION_LIMIT_ARRAY } from "./model/constants/common";
 export { selectTriggerClassNames, selectItemClassNames } from "./model/config/filters";
 
+export {default as useGetTasks} from "./api/hooks/useGetTasks";
+export {default as useTaskCreate} from "./api/hooks/useTaskCreate";
+export {default as useGetTags} from "./api/hooks/useGetTags";
+export {default as useUpdateTaskStatus} from "./api/hooks/useUpdateTaskStatus";
+
 export {default as TaskList} from "./ui/TaskList";
 export {default as StatusChange} from "./ui/StatusChange";
-export {default as useUpdateTaskStatus} from "./api/hooks/useUpdateTaskStatus";
 export {default as TaskDetails} from "./ui/details/TaskDetails";
 export {default as TaskDetailsInfoForm} from "./ui/details/form/TaskDetailsInfoForm";
 export {default as FiltersBlock} from "./ui/filters/FiltersBlock";
@@ -18,7 +22,5 @@ export {default as ControlledDatePicker} from "./ui/details/form/ControlledDateP
 export {default as ControlledTagAutocomplete} from "./ui/details/form/ControlledTagAutocomplete";
 
 export {type TaskSchemaType, taskSchema} from "./model/schemas/details.schema";
-
-export {default as useTaskCreate} from "./api/hooks/useTaskCreate";
 
 export type {CreateTaskForm} from "./model/types/form";

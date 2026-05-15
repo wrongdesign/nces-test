@@ -1,16 +1,13 @@
 "use client"
 
-import {
-    useLazyGetTagsQuery,
-    useLazyGetTasksQuery
-} from "@/shared/model/store/api/task.api";
+import { useLazyGetTasksQuery } from "@/shared/model/store/api/task.api";
 import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/shared/model/store";
 import {
-    setFetchTags,
     setFetchTasks,
-    setPaginationInfo, setTags, setTasks,
+    setPaginationInfo,
+    setTasks,
 } from "@/shared/model/store/slices/task/task.slice";
 
 const useGetTasks = () => {
@@ -18,25 +15,17 @@ const useGetTasks = () => {
 
     const currentPagination = useAppSelector(state => state.task.currentPagination);
     const fetchTasks = useAppSelector(state => state.task.fetchTasks);
-    const fetchTags = useAppSelector(state => state.task.fetchTags);
     const filters = useAppSelector(state => state.task.filters);
 
     const [getTasks, {data: tasks, isLoading: tasksLoading, error: getTasksError}] = useLazyGetTasksQuery();
-    const [getTags, {data: tags, isLoading: tagsLoading, error: getTagsError}] = useLazyGetTagsQuery();
 
-    useApiErrorToast(getTasksError || getTagsError);
+    useApiErrorToast(getTasksError);
 
     useEffect(() => {
         if (fetchTasks) {
             getTasks({ ...currentPagination, ...filters}).unwrap();
         }
     }, [fetchTasks, getTasks, currentPagination, filters]);
-
-    useEffect(() => {
-        if (fetchTags) {
-            getTags().unwrap();
-        }
-    }, [fetchTags, getTags]);
 
     useEffect(() => {
         if (tasks) {
@@ -46,16 +35,8 @@ const useGetTasks = () => {
         }
     }, [tasks, dispatch]);
 
-    useEffect(() => {
-        if (tags) {
-            dispatch(setFetchTags(false));
-            dispatch(setTags(tags));
-        }
-    }, [tags, dispatch]);
-
     return {
-        loading: tasksLoading || tagsLoading,
-        tags: tags
+        tasksLoading,
     };
 }
 

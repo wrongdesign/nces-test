@@ -3,7 +3,7 @@
 import useGetTasks from "@/features/task/api/hooks/useGetTasks";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {useAppDispatch, useAppSelector} from "@/shared/model/store";
-import {FiltersBlock, TaskComponent, TaskPagination} from "@/features/task";
+import {FiltersBlock, TaskComponent, TaskPagination, useGetTags} from "@/features/task";
 import {useEffect} from "react";
 import {setFetchTags, setFetchTasks, setFilters} from "@/shared/model/store/slices/task/task.slice";
 
@@ -12,8 +12,13 @@ const TaskList = () => {
 
     const filters = useAppSelector(state => state.task.filters);
     const tasks = useAppSelector((state) => state.task.tasks);
+    const tags = useAppSelector((state) => state.task.tags);
 
-    const { loading, tags } = useGetTasks();
+    const { tasksLoading } = useGetTasks();
+
+    const { tagsLoading } = useGetTags();
+
+    const loading: boolean = tasksLoading || tagsLoading;
 
     useEffect(() => {
         dispatch(setFetchTasks(true));
