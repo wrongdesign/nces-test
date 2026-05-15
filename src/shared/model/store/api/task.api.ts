@@ -64,6 +64,15 @@ export const taskApi = createApi({
                 url: `/api/task/${id}`,
                 method: "DELETE",
             })
+        }),
+        createTag: builder.mutation<void, Pick<Tag, "name">>({
+            query: ({ name }) => ({
+                url: "/api/task/tags/create",
+                method: "POST",
+                body: {
+                    name
+                }
+            })
         })
     })
 })
@@ -76,4 +85,5 @@ export const {
     useCreateTaskMutation,
     useUpdateTaskMutation,
     useLazyDeleteTaskQuery,
+    useCreateTagMutation,
 } = taskApi
