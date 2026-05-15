@@ -23,7 +23,10 @@ const StatusChange = ({ status, updateStatus }: Props) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent sideOffset={8} align="end" className="border-0 bg-background/90 p-0">
                 {TaskStatusesArray.map((statusItem) => (
-                    <DropdownMenuItem key={statusItem} onClick={async () => await updateStatus(statusItem)} className="defaultDropDownPoint">
+                    <DropdownMenuItem key={statusItem} onClick={async (e) => {
+                        e.stopPropagation();
+                        await updateStatus(statusItem);
+                    }} className="defaultDropDownPoint">
                         {StatusesLabeled[statusItem ?? TaskStatusEnum.TODO]?.label}
                     </DropdownMenuItem>
                 ))}
