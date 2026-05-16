@@ -2,7 +2,7 @@
 
 import {Button} from "@/shared/ui/button";
 import {TaskMode, type TaskModeType} from "@/entities/task";
-import {TaskDetailsInfoForm, useGetTaskDetails} from "@/features/task";
+import {TaskDetailsInfoForm, useGetTags, useGetTaskDetails} from "@/features/task";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 
 interface Props {
@@ -11,6 +11,10 @@ interface Props {
 
 const TaskDetails = ({ taskMode }: Props) => {
     const { task, getTaskLoading } = useGetTaskDetails();
+
+    const { tagsLoading } = useGetTags();
+
+    const loading: boolean = getTaskLoading || tagsLoading;
 
     return(
         <div className="flex flex-col gap-4 w-full!">
@@ -24,7 +28,7 @@ const TaskDetails = ({ taskMode }: Props) => {
                 </div>
             )}
 
-            {getTaskLoading && <LoaderComponent />}
+            {loading && <LoaderComponent />}
         </div>
     );
 }

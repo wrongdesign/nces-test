@@ -110,7 +110,9 @@ const ControlledTagAutocomplete = <T extends FieldValues>({ control, errors, nam
                                                         variant="default"
                                                         disabled={createTagLoading}
                                                         onClick={async () => {
-                                                            await handleCreateTag({name: search});
+                                                            const tag = await handleCreateTag({ name: search });
+
+                                                            if (tag) handleSelect(tag);
 
                                                             setSearch("");
                                                         }}
