@@ -2,16 +2,19 @@
 
 import {Button} from "@/shared/ui/button";
 import {TaskMode, type TaskModeType} from "@/entities/task";
-import {TaskDetailsInfoForm} from "@/features/task";
+import {TaskDetailsInfoForm, useGetTaskDetails} from "@/features/task";
+import LoaderComponent from "@/shared/ui/LoaderComponent";
 
 interface Props {
     taskMode: TaskModeType;
 }
 
 const TaskDetails = ({ taskMode }: Props) => {
+    const { task, getTaskLoading } = useGetTaskDetails();
+
     return(
         <div className="flex flex-col gap-4 w-full!">
-            <TaskDetailsInfoForm />
+            <TaskDetailsInfoForm taskMode={taskMode} task={task} />
 
             {taskMode !== TaskMode.CREATE && (
                 <div className={'flex justify-end w-full!'}>
@@ -21,6 +24,7 @@ const TaskDetails = ({ taskMode }: Props) => {
                 </div>
             )}
 
+            {getTaskLoading && <LoaderComponent />}
         </div>
     );
 }

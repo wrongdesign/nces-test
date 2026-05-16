@@ -4,22 +4,36 @@ import {useForm} from "react-hook-form";
 import {
     ControlledDatePicker,
     ControlledTagAutocomplete,
-    PriorityRadio,
+    PriorityRadio, StatusChange,
     taskSchema,
     type TaskSchemaType,
-    useTaskCreate
+    useTaskDetailsActions
 } from "@/features/task";
 import {zodResolver} from "@hookform/resolvers/zod";
 import DefaultFormWrapper from "@/widgets/DefaultFormWrapper/DefaultFormWrapper";
 import FormField from "@/shared/ui/FormField";
 import {cn} from "@/shared/model/utils/utils";
-import {PriorityEnum} from "@/entities/task";
+import {
+    PriorityEnum,
+    type Task,
+    TaskMode,
+    type TaskModeType,
+    type TaskStatusType,
+    TaskStatusUpdateModeEnum
+} from "@/entities/task";
+import {useEffect} from "react";
 
-const TaskDetailsInfoForm = () => {
+interface Props {
+    task: Task | undefined;
+    taskMode: TaskModeType;
+}
+
+const TaskDetailsInfoForm = ({ taskMode, task }: Props) => {
     const {
         control,
         handleSubmit,
         formState: { errors },
+        setValue,
     } = useForm<TaskSchemaType>({
         resolver: zodResolver(taskSchema),
         defaultValues: {
@@ -27,14 +41,25 @@ const TaskDetailsInfoForm = () => {
         }
     });
 
-    const { onSubmit, loading } = useTaskCreate();
+    useEffect(() => {
+        console.log(task?.status);
+        if (task && taskMode === TaskMode.WORKING) {
+            setValue("title", task.title)
+            setValue("description", task.description)
+            setValue("deadline", task.deadline)
+            setValue("tags", task.tags)
+            setValue("priority", task.priority as PriorityEnum)
+        }
+    }, [task, setValue, taskMode])
+
+    const { loading, handleUpdateTaskStatus, handleUpdateTask, createTaskSubmit } = useTaskDetailsActions();
 
     return(
         <DefaultFormWrapper
             mainWrapperStyles={"flex flex-col gap-2! "}
             buttonText="Create task"
             buttonDisabled={loading}
-            buttonSubmit={handleSubmit(onSubmit)}>
+            buttonSubmit={handleSubmit(taskMode === TaskMode.CREATE ? createTaskSubmit : handleUpdateTask)}>
             <div className="flex flex-row gap-6 w-full!">
                 <div className="flex flex-col gap-2 basis-[80%]">
                     <FormField
@@ -76,6 +101,12 @@ const TaskDetailsInfoForm = () => {
                         name={"deadline"}
                         label={"Deadline"}
                     />
+
+                    {task &&
+                        <StatusChange status={task.status} updateStatus={async (status: TaskStatusType) => {
+                            await handleUpdateTaskStatus({ id: task.id, status: status }, TaskStatusUpdateModeEnum.DETAILS);
+                        }} />
+                    }
                 </div>
             </div>
         </DefaultFormWrapper>

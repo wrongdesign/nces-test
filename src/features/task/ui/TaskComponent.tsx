@@ -46,7 +46,7 @@ const TaskComponent = React.memo(
                 className="flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none"
                 variant={expiredDeadline ? "destructive" : "secondary"}
                 onClick={() => {
-                    dispatch(setTaskExpired(true));
+                    dispatch(setTaskExpired(expiredDeadline));
                     startTransition(() => {
                         router.push(`/dashboard/task/${id}`);
                     })
