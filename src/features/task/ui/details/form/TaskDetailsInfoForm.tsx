@@ -4,7 +4,9 @@ import {useForm} from "react-hook-form";
 import {
     ControlledDatePicker,
     ControlledTagAutocomplete,
-    PriorityRadio, StatusChange,
+    PriorityRadio,
+    StatusChange,
+    submitFormText,
     taskSchema,
     type TaskSchemaType,
     useTaskDetailsActions
@@ -58,7 +60,7 @@ const TaskDetailsInfoForm = ({ taskMode, task }: Props) => {
     return(
         <DefaultFormWrapper
             mainWrapperStyles={"flex flex-col gap-2! "}
-            buttonText="Create task"
+            buttonText={submitFormText[taskMode]}
             buttonDisabled={loading}
             buttonSubmit={handleSubmit(taskMode === TaskMode.CREATE ? createTaskSubmit : handleUpdateTask)}>
             <div className="flex flex-col md:flex-row gap-2 md:gap-6 w-full!">
@@ -103,7 +105,7 @@ const TaskDetailsInfoForm = ({ taskMode, task }: Props) => {
                         label={"Deadline"}
                     />
 
-                    {task &&
+                    {task && taskMode === TaskMode.WORKING &&
                         <>
                             <div className="flex flex-col gap-0.5">
                                 <Label>Status</Label>
