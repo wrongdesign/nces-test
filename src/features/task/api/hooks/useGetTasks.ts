@@ -18,7 +18,7 @@ const useGetTasks = () => {
     const filters = useAppSelector(state => state.task.filters);
 
     const {data: tasks, isLoading: tasksLoading, error: getTasksError, refetch: getTasks} =
-        useGetTasksQuery({ ...currentPagination, ...filters }, { skip: !fetchTasks });
+        useGetTasksQuery({ ...currentPagination, ...filters });
 
     useApiErrorToast(getTasksError);
 
