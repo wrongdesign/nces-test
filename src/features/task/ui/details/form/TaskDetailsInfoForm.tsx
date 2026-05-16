@@ -22,6 +22,8 @@ import {
     TaskStatusUpdateModeEnum
 } from "@/entities/task";
 import {useEffect} from "react";
+import {Label} from "@/shared/ui/label";
+import {Calendar, CalendarSync} from "lucide-react";
 
 interface Props {
     task: Task | undefined;
@@ -42,7 +44,6 @@ const TaskDetailsInfoForm = ({ taskMode, task }: Props) => {
     });
 
     useEffect(() => {
-        console.log(task?.status);
         if (task && taskMode === TaskMode.WORKING) {
             setValue("title", task.title)
             setValue("description", task.description)
@@ -60,7 +61,7 @@ const TaskDetailsInfoForm = ({ taskMode, task }: Props) => {
             buttonText="Create task"
             buttonDisabled={loading}
             buttonSubmit={handleSubmit(taskMode === TaskMode.CREATE ? createTaskSubmit : handleUpdateTask)}>
-            <div className="flex flex-row gap-6 w-full!">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-6 w-full!">
                 <div className="flex flex-col gap-2 basis-[80%]">
                     <FormField
                         control={control}
@@ -103,9 +104,26 @@ const TaskDetailsInfoForm = ({ taskMode, task }: Props) => {
                     />
 
                     {task &&
-                        <StatusChange status={task.status} updateStatus={async (status: TaskStatusType) => {
-                            await handleUpdateTaskStatus({ id: task.id, status: status }, TaskStatusUpdateModeEnum.DETAILS);
-                        }} />
+                        <>
+                            <div className="flex flex-col gap-0.5">
+                                <Label>Status</Label>
+                                <StatusChange status={task.status} updateStatus={async (status: TaskStatusType) => {
+                                    await handleUpdateTaskStatus({ id: task.id, status: status }, TaskStatusUpdateModeEnum.DETAILS);
+                                }} />
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <Calendar className="text-gray-600 dark:text-white" size={20} />
+                                <p className="text-sm leading-none text-gray-600 dark:text-white select-none">
+                                    {new Date(task.createdAt ?? '').toLocaleString()}
+                                </p>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <CalendarSync className="text-gray-600 dark:text-white" size={20} />
+                                <p className="text-sm leading-none text-gray-600 dark:text-white select-none">
+                                    {new Date(task.updatedAt ?? '').toLocaleString()}
+                                </p>
+                            </div>
+                        </>
                     }
                 </div>
             </div>
