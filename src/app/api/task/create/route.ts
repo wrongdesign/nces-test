@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
         const task: Task = { ...body, updatedAt, id: taskId, createdAt, status: TaskStatusEnum.TODO }
 
-        writeFile("src/app/api/task/tasks.json", [ ...mockTasks, task ]);
+        writeFile("src/app/api/task/mocks/tasks.json", [ ...mockTasks, task ]);
 
         return new NextResponse(null,
             {

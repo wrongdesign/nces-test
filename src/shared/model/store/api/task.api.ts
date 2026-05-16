@@ -54,7 +54,7 @@ export const taskApi = createApi({
         }),
         updateTask: builder.mutation<void, { data: Partial<TaskSchemaType>, id: Pick<Task, "id"> }>({
             query: ({ data, id }: { data: Partial<TaskSchemaType>, id: Pick<Task, "id"> }) => ({
-                url: `/api/task/${id}`,
+                url: `/api/task/${id.id}`,
                 method: "PATCH",
                 body: {...data}
             })

@@ -11,6 +11,7 @@ export {default as useTaskUpdate} from "./api/hooks/useTaskUpdate";
 export {default as useCreateTag} from "./api/hooks/useCreateTag";
 export {default as useTaskDetailsActions} from "./api/hooks/useTaskDetailsActions";
 export {default as useGetTaskDetails} from "./api/hooks/useGetTaskDetails";
+export {default as useTaskDelete} from "./api/hooks/useTaskDelete";
 
 export {default as TaskList} from "./ui/TaskList";
 export {default as StatusChange} from "./ui/StatusChange";
@@ -24,7 +25,8 @@ export {default as TaskPagination} from "./ui/TaskPagination";
 export {default as PriorityRadio} from "./ui/details/form/PriorityRadio";
 export {default as ControlledDatePicker} from "./ui/details/form/ControlledDatePicker";
 export {default as ControlledTagAutocomplete} from "./ui/details/form/ControlledTagAutocomplete";
+export {default as DeleteTask} from"./ui/details/DeleteTask";
 
 export {type TaskSchemaType, taskSchema} from "./model/schemas/details.schema";
 
-export type {CreateTaskForm} from "./model/types/form";
+export {type CreateTaskForm, submitFormText} from "./model/types/form";
