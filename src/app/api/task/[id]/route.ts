@@ -1,6 +1,6 @@
 import {type NextRequest, NextResponse} from "next/server";
 import {INTERNAL_ERROR} from "@/app/api/config/common";
-import {type Task, TaskStatusEnum} from "@/entities/task";
+import type {Task} from "@/entities/task";
 import {readFile, writeFile} from "@/app/api/task/utils/common";
 import type {TaskSchemaType} from "@/features/task";
 import {formatDate} from "@/shared/model/utils/date";
@@ -31,32 +31,6 @@ export async function GET(
         console.error("[GET_TASK_BY_ID]", error)
 
         return INTERNAL_ERROR(error)
-    }
-}
-
-export async function POST(request: NextRequest) {
-    try {
-        const body: TaskSchemaType = await request.json();
-        const mockTasks: Task[] = readFile("src/app/api/task/mocks/tasks.json");
-        const taskId = crypto.randomUUID();
-
-        const date = new Date();
-        const createdAt = formatDate(date, "sv-SE", "full");
-        const updatedAt = formatDate(date, "sv-SE", "full");
-
-        const task: Task = { ...body, updatedAt, id: taskId, createdAt, status: TaskStatusEnum.TODO }
-
-        writeFile("src/app/api/task/tasks.json", [ ...mockTasks, task ]);
-
-        return new NextResponse(null,
-            {
-                status: 204,
-            }
-        );
-    } catch (error) {
-        console.error("[TASK_POST]", error);
-
-        return INTERNAL_ERROR(error);
     }
 }
 
