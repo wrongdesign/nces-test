@@ -42,7 +42,11 @@ export async function PATCH(
             setTimeout(resolve, 1000)
         })
 
-        return NextResponse.json(newTask)
+        return new NextResponse(null,
+            {
+                status: 204,
+            }
+        );
     } catch (error) {
         console.error("[PATCH_STATUS]", error)
 
