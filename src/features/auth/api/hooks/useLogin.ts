@@ -4,7 +4,7 @@ import type {AuthFormType} from "@/features/auth";
 import {useLoginMutation} from "@/shared/model/store/api/auth.api";
 import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
 import {useTransition} from "react";
-import {useRouter} from "next/dist/client/components/navigation";
+import {useRouter} from "next/navigation";
 
 const useLogin = () => {
     const [login, {isLoading: loginLoading, error: loginError}] = useLoginMutation();

@@ -2,7 +2,7 @@
 
 import {Button} from "@/shared/ui/button";
 import {ChevronLeft} from "lucide-react";
-import {useRouter, useSearchParams} from "next/dist/client/components/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {useTransition} from "react";
 import {cn} from "@/shared/model/utils/utils";
 

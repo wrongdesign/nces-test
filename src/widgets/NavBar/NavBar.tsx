@@ -1,6 +1,6 @@
 "use client"
 
-import {useRouter} from "next/dist/client/components/navigation";
+import {useRouter} from "next/navigation";
 import {useTransition} from "react";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import Image from "next/image";

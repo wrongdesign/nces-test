@@ -7,7 +7,7 @@ import {CalendarClock} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/shared/ui/tooltip";
 import {Badge} from "@/shared/ui/badge";
 import {StatusChange} from "@/features/task";
-import {useRouter} from "next/dist/client/components/navigation";
+import {useRouter} from "next/navigation";
 import React, {useTransition} from "react";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {useAppDispatch} from "@/shared/model/store";

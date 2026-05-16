@@ -2,7 +2,7 @@
 
 import {useAppDispatch} from "@/shared/model/store";
 import {useTransition} from "react";
-import {useRouter} from "next/dist/client/components/navigation";
+import {useRouter} from "next/navigation";
 import {clearUser} from "@/shared/model/store/slices/auth/auth.slice";
 
 const useLogout = () => {

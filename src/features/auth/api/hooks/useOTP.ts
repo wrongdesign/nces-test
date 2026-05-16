@@ -1,6 +1,6 @@
 import {useVerify2faMutation} from "@/shared/model/store/api/auth.api";
 import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
-import {useRouter} from "next/dist/client/components/navigation";
+import {useRouter} from "next/navigation";
 import {useTransition} from "react";
 import {useAppDispatch} from "@/shared/model/store";
 import {updateUser} from "@/shared/model/store/slices/auth/auth.slice";

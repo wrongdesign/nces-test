@@ -4,7 +4,7 @@ import {useCreateTaskMutation} from "@/shared/model/store/api/task.api";
 import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
 import {useTransition} from "react";
 import type {TaskSchemaType} from "@/features/task";
-import {useRouter} from "next/dist/client/components/navigation";
+import {useRouter} from "next/navigation";
 
 const useTaskCreate = () => {
     const [createTask, { isLoading: createTaskLoading, error: createTaskError }] = useCreateTaskMutation();
