@@ -16,7 +16,7 @@ const useLogin = () => {
 
     const onSubmit = async (data: AuthFormType) => {
         try {
-            await login(data);
+            await login(data).unwrap();
 
             startTransition(() => {
                 router.push("/otp");

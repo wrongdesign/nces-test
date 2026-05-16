@@ -20,8 +20,8 @@ const OtpForm = () => {
             buttonSubmit={() => onSubmit(code).catch(console.error)}>
             <Field className="w-fit">
                 <FieldLabel htmlFor="otp-block">Enter OTP</FieldLabel>
-                <InputOTP id="otp-block" maxLength={6} pattern={REGEXP_ONLY_DIGITS} value={code} onChange={(value) => setCode(value)}>
-                    <InputOTPGroup>
+                <InputOTP autoFocus={true} id="otp-block" maxLength={6} pattern={REGEXP_ONLY_DIGITS} value={code} onChange={(value) => setCode(value)}>
+                    <InputOTPGroup >
                         <InputOTPSlot index={0} />
                         <InputOTPSlot index={1} />
                         <InputOTPSlot index={2} />

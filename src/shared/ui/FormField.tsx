@@ -13,6 +13,7 @@ import clsx from "clsx"
 import {Textarea} from "@/shared/ui/textarea";
 import {Input} from "@/shared/ui/input";
 import type React from "react";
+import type {HTMLInputTypeAttribute} from "react";
 import {Label} from "@/shared/ui/label";
 
 interface FormFieldProps<T extends FieldValues> {
@@ -25,7 +26,7 @@ interface FormFieldProps<T extends FieldValues> {
     styles?: string
     inputStyles?: string
     textarea?: boolean
-    type?: "text" | "number"
+    type?:  HTMLInputTypeAttribute;
 }
 
 export default function FormField<T extends FieldValues>({
