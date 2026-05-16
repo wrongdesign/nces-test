@@ -6,6 +6,7 @@ import type {
 
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type {RootState} from "@/shared/model/store";
+import {eventBus} from "@/shared/model/store/event/eventBus";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
@@ -56,15 +57,17 @@ const baseQueryWithErrorHandling: BaseQueryFn<
 
         if (data && typeof data === "object") {
             message =
-                (data as any).message ||
-                (data as any).devMessage ||
+                String("message" in data && data.message) ||
                 JSON.stringify(data);
         } else if (typeof data === "string") {
             message = data;
         }
 
         if (status === 401 || status === 403) {
-        //     TODO: Place here redirection
+            eventBus.emit({
+                type: "AUTH_ERROR",
+                payload: { status, message },
+            });
         }
 
         return {
@@ -76,22 +79,6 @@ const baseQueryWithErrorHandling: BaseQueryFn<
     }
 
     return result;
-};
-
-export const baseFileErrorResponseHandler = (response: any) => {
-    let message = "Unknown error";
-
-    if (response.data && typeof response.data === "object") {
-        message =
-            response.data.message || response.data.devMessage || "Failed to get file";
-    } else if (typeof response.data === "string") {
-        message = response.data;
-    }
-
-    return {
-        status: response.status,
-        message: message,
-    };
 };
 
 export default baseQueryWithErrorHandling;
