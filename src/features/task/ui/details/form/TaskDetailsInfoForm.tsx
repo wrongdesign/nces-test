@@ -111,17 +111,23 @@ const TaskDetailsInfoForm = ({ taskMode, task }: Props) => {
                                     await handleUpdateTaskStatus({ id: task.id, status: status }, TaskStatusUpdateModeEnum.DETAILS);
                                 }} />
                             </div>
-                            <div className="flex items-center gap-1">
-                                <Calendar className="text-gray-600 dark:text-white" size={20} />
-                                <p className="text-sm leading-none text-gray-600 dark:text-white select-none">
-                                    {new Date(task.createdAt ?? '').toLocaleString()}
-                                </p>
+                            <div className="flex flex-col gap-0.5">
+                                <Label>Created At</Label>
+                                <div className="flex items-center gap-1">
+                                    <Calendar className="text-gray-600 dark:text-white" size={20} />
+                                    <p className="text-sm leading-none text-gray-600 dark:text-white select-none">
+                                        {new Date(task.createdAt ?? '').toLocaleString()}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-1">
-                                <CalendarSync className="text-gray-600 dark:text-white" size={20} />
-                                <p className="text-sm leading-none text-gray-600 dark:text-white select-none">
-                                    {new Date(task.updatedAt ?? '').toLocaleString()}
-                                </p>
+                            <div className="flex flex-col gap-0.5">
+                                <Label>Updated At</Label>
+                                <div className="flex items-center gap-1">
+                                    <CalendarSync className="text-gray-600 dark:text-white" size={20} />
+                                    <p className="text-sm leading-none text-gray-600 dark:text-white select-none">
+                                        {new Date(task.updatedAt ?? '').toLocaleString()}
+                                    </p>
+                                </div>
                             </div>
                         </>
                     }
