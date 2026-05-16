@@ -16,7 +16,7 @@
     "id": "task_2",
     "title": "So hard task",
     "description": "Create CRUD for B2B platform and 3 microservices on Golang",
-    "status": "done",
+    "status": "todo",
     "priority": "medium",
     "deadline": "2026-09-12 12:00:00",
     "tags": [
@@ -29,7 +29,7 @@
     "id": "task_3",
     "title": "Meet with team",
     "description": "Small talk about new important Fintech project",
-    "status": "done",
+    "status": "inProgress",
     "priority": "high",
     "deadline": "2026-09-11 12:00:00",
     "tags": [

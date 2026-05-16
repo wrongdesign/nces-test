@@ -30,7 +30,7 @@ export const taskApi = createApi({
                 method: "GET",
             })
         }),
-        updateStatus: builder.mutation<Task, TaskStatusUpdate>({
+        updateStatus: builder.mutation<void, TaskStatusUpdate>({
             query: ({ id, status }) => ({
                 url: `/api/task/status/${id}`,
                 method: "PATCH",
@@ -78,7 +78,7 @@ export const taskApi = createApi({
 })
 
 export const {
-    useLazyGetTasksQuery,
+    useGetTasksQuery,
     useLazyGetTagsQuery,
     useUpdateStatusMutation,
     useLazyGetTaskByIdQuery,
