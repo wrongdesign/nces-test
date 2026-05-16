@@ -65,7 +65,7 @@ export const taskApi = createApi({
                 method: "DELETE",
             })
         }),
-        createTag: builder.mutation<void, Pick<Tag, "name">>({
+        createTag: builder.mutation<{ id: string }, Pick<Tag, "name">>({
             query: ({ name }) => ({
                 url: "/api/task/tags/create",
                 method: "POST",

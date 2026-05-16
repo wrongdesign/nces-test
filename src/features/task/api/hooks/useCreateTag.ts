@@ -13,11 +13,18 @@ const useCreateTag = () => {
 
     useApiErrorToast(createTagError);
 
-    const handleCreateTag = async ({ name }: Pick<Tag, "name">) => {
+    const handleCreateTag = async ({ name }: Pick<Tag, "name">): Promise<Tag | undefined> => {
         try {
-            await createTag({ name }).unwrap();
+            const response = await createTag({ name }).unwrap();
 
-            dispatch(setFetchTags(true));
+            if (response) {
+                dispatch(setFetchTags(true));
+
+                return {
+                    id: response.id,
+                    name
+                };
+            }
         } catch (e) {
             console.error(e);
         }

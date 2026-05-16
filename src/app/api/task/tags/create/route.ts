@@ -27,11 +27,7 @@ export async function POST(request: NextRequest) {
 
         writeFile("src/app/api/task/mocks/tags.json", newTagsList);
 
-        return new NextResponse(null,
-            {
-                status: 204,
-            }
-        );
+        return NextResponse.json(newTag);
     } catch (error) {
         console.error("[CREATE_TAG]", error)
 
