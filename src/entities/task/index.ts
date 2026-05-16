@@ -18,4 +18,6 @@ export {
     StatusesLabeled,
     TaskSortingLabeled,
     TaskSortingArray,
+    type TaskStatusUpdateModeType,
+    TaskStatusUpdateModeEnum,
 } from "./model/task.model";

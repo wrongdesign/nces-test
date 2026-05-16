@@ -6,6 +6,7 @@ import type {TaskSchemaType} from "@/features/task";
 import {formatDate} from "@/shared/model/utils/date";
 
 export async function GET(
+    request: NextRequest,
     context: {
         params: Promise<{
             id: string

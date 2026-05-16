@@ -81,7 +81,7 @@ export const {
     useGetTasksQuery,
     useLazyGetTagsQuery,
     useUpdateStatusMutation,
-    useLazyGetTaskByIdQuery,
+    useGetTaskByIdQuery,
     useCreateTaskMutation,
     useUpdateTaskMutation,
     useLazyDeleteTaskQuery,

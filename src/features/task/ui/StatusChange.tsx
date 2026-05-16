@@ -15,7 +15,7 @@ const StatusChange = ({ status, updateStatus }: Props) => {
         <DropdownMenu>
             <DropdownMenuTrigger asChild className="hover:scale-[1.1]">
                 <Badge className={cn(
-                    `px-2 py-1 rounded-lg text-xs font-semibold text-white`,
+                    `px-2 py-1 rounded-lg text-xs font-semibold text-white select-none! cursor-pointer!`,
                     StatusesLabeled[status ?? TaskStatusEnum.TODO]?.classNames
                 )}>
                     {StatusesLabeled[status ?? TaskStatusEnum.TODO]?.label}

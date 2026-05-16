@@ -1,11 +1,7 @@
 import { z } from "zod"
-import {PriorityEnum, TaskStatusEnum} from "@/entities/task";
+import {PriorityEnum} from "@/entities/task";
 
-export const taskStatusSchema = z.object({
-    status: z.enum(TaskStatusEnum),
-})
-
-export const taskSchema = taskStatusSchema.extend({
+export const taskSchema = z.object({
     title: z
         .string("Title is required")
         .min(5, "Minimum 5 symbols")

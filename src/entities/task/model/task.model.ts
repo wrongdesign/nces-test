@@ -125,3 +125,10 @@ export enum TaskMode {
 }
 
 export type TaskModeType = `${TaskMode}`;
+
+export enum TaskStatusUpdateModeEnum {
+    DEFAULT = 'DEFAULT',
+    DETAILS = 'DETAILS',
+}
+
+export type TaskStatusUpdateModeType = `${TaskStatusUpdateModeEnum}`;
