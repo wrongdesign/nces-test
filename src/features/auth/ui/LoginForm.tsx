@@ -32,7 +32,7 @@ const LoginForm = () => {
                 errors={errors}
                 inputProps={{
                     autoComplete: 'email',
-                    placeholder: 'email@email.com',
+                    placeholder: 'Type: email@email.com',
                 }}
             />
 
@@ -41,7 +41,10 @@ const LoginForm = () => {
                 label="Password"
                 name="password"
                 errors={errors}
-
+                type={"password"}
+                inputProps={{
+                    placeholder: 'Type: 12345678',
+                }}
             />
         </DefaultFormWrapper>
     );
