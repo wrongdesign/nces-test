@@ -38,5 +38,44 @@
     ],
     "createdAt": "2026-05-10 12:00:00",
     "updatedAt": "2026-05-12 12:00:00"
+  },
+  {
+    "id": "task_4",
+    "title": "CRM Backend",
+    "description": "Payments module integration",
+    "status": "done",
+    "priority": "low",
+    "deadline": "2025-09-22 12:00:00",
+    "tags": [
+      "tag_backend"
+    ],
+    "createdAt": "2026-05-14 12:00:00",
+    "updatedAt": "2026-05-14 12:00:00"
+  },
+  {
+    "id": "task_5",
+    "title": "CRM Frontend",
+    "description": "Payment layouts and UX flow",
+    "status": "todo",
+    "priority": "medium",
+    "deadline": "2026-09-23 12:00:00",
+    "tags": [
+      "tag_frontend"
+    ],
+    "createdAt": "2026-05-15 12:00:00",
+    "updatedAt": "2026-05-15 12:00:00"
+  },
+  {
+    "id": "task_6",
+    "title": "DevOps",
+    "description": "Payments microservice",
+    "status": "inProgress",
+    "priority": "high",
+    "deadline": "2026-09-26 12:00:00",
+    "tags": [
+      "tag_backend"
+    ],
+    "createdAt": "2026-05-16 12:00:00",
+    "updatedAt": "2026-05-16 12:00:00"
   }
 ]
