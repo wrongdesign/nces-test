@@ -4,8 +4,8 @@ import {useUpdateStatusMutation} from "@/shared/model/store/api/task.api";
 import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
 import {useAppDispatch} from "@/shared/model/store";
 
-import type {TaskStatusUpdate} from "@/entities/task";
-import {setFetchTasks} from "@/shared/model/store/slices/task/task.slice";
+import {type TaskStatusUpdate, TaskStatusUpdateModeEnum, type TaskStatusUpdateModeType} from "@/entities/task";
+import {setFetchTasks, setUpdateSelectedTask} from "@/shared/model/store/slices/task/task.slice";
 import {useState} from "react";
 
 const useUpdateTaskStatus = () => {
@@ -17,13 +17,17 @@ const useUpdateTaskStatus = () => {
 
     useApiErrorToast(updateStatusError);
 
-    const handleUpdateTaskStatus = async (data: TaskStatusUpdate) => {
+    const handleUpdateTaskStatus = async (data: TaskStatusUpdate, mode: TaskStatusUpdateModeType = TaskStatusUpdateModeEnum.DEFAULT) => {
         try {
             setUpdatingTask({ id: data.id });
 
             await updateTaskStatus(data).unwrap();
 
-            dispatch(setFetchTasks(true));
+            if (mode === TaskStatusUpdateModeEnum.DEFAULT) {
+                dispatch(setFetchTasks(true));
+            } else {
+                dispatch(setUpdateSelectedTask(true));
+            }
         } catch (e) {
             console.error(e);
         } finally {
