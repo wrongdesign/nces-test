@@ -21,7 +21,8 @@ export interface TaskState extends TaskPaginationResponse {
     fetchTags: boolean;
     fetchTasks: boolean;
     filters: Partial<TaskFiltersModel>;
-    selectedTask: string | undefined;
+    selectedTask: Pick<Task, "id"> | undefined;
+    updateSelectedTask: boolean;
     taskExpired: boolean;
     currentPagination: Pagination;
     tags: Tag[] | undefined;

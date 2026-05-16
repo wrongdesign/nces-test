@@ -12,6 +12,7 @@ const initialState: TaskState = {
     },
     pagination: undefined,
     selectedTask: undefined,
+    updateSelectedTask: false,
     taskExpired: false,
     currentPagination: {
         page: 1,
@@ -46,7 +47,11 @@ export const taskSlice = createSlice({
             state.fetchTasks = true;
         },
         setSelectedTask: (state, action: PayloadAction<string | undefined>) => {
-            state.selectedTask = action.payload;
+            if (action.payload) state.selectedTask = { id: action.payload }
+            else state.selectedTask = undefined;
+        },
+        setUpdateSelectedTask: (state, action: PayloadAction<boolean>) => {
+            state.updateSelectedTask = action.payload;
         },
         setTaskExpired: (state, action: PayloadAction<boolean>) => {
             state.taskExpired = action.payload;
@@ -67,5 +72,6 @@ export const {
     setFetchTasks,
     setFetchTags,
     setTags,
+    setUpdateSelectedTask,
 } = taskSlice.actions;
 export default taskSlice.reducer;
