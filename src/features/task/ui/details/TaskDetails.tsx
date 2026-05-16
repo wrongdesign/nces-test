@@ -1,8 +1,7 @@
 "use client"
 
-import {Button} from "@/shared/ui/button";
 import {TaskMode, type TaskModeType} from "@/entities/task";
-import {TaskDetailsInfoForm, useGetTags, useGetTaskDetails} from "@/features/task";
+import {DeleteTask, TaskDetailsInfoForm, useGetTags, useGetTaskDetails, useTaskDelete} from "@/features/task";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 
 interface Props {
@@ -14,18 +13,16 @@ const TaskDetails = ({ taskMode }: Props) => {
 
     const { tagsLoading } = useGetTags();
 
-    const loading: boolean = getTaskLoading || tagsLoading;
+    const { handleDeleteTask, loadingDeleteProcess } = useTaskDelete();
+
+    const loading: boolean = getTaskLoading || tagsLoading || loadingDeleteProcess;
 
     return(
         <div className="flex flex-col gap-4 w-full!">
             <TaskDetailsInfoForm taskMode={taskMode} task={task} />
 
             {taskMode !== TaskMode.CREATE && (
-                <div className={'flex justify-end w-full!'}>
-                    <Button variant="destructive" className="cursor-pointer" onClick={() => {}}>
-                        Close task
-                    </Button>
-                </div>
+                <DeleteTask onConfirm={async () => await handleDeleteTask(task?.id ?? "")} />
             )}
 
             {loading && <LoaderComponent />}
