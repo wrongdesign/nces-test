@@ -10,6 +10,8 @@ import {StatusChange} from "@/features/task";
 import {useRouter} from "next/dist/client/components/navigation";
 import React, {useTransition} from "react";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
+import {useAppDispatch} from "@/shared/model/store";
+import {setTaskExpired} from "@/shared/model/store/slices/task/task.slice";
 
 interface Props {
     tagsList: Tag[] | undefined;
@@ -32,6 +34,8 @@ const TaskComponent = React.memo(
          handleUpdateTaskStatus,
          disabled,
      }: Task & Props) => {
+        const dispatch = useAppDispatch();
+
         const router = useRouter();
         const [isPending, startTransition] = useTransition();
 
@@ -42,6 +46,7 @@ const TaskComponent = React.memo(
                 className="flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none"
                 variant={expiredDeadline ? "destructive" : "secondary"}
                 onClick={() => {
+                    dispatch(setTaskExpired(true));
                     startTransition(() => {
                         router.push(`/dashboard/task/${id}`);
                     })

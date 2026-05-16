@@ -1,6 +1,6 @@
 import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
 import type {TaskFiltersModel, TaskPaginationResponse, TaskState} from "./task.model";
-import {type Tag, type Task, TaskSortingEnum} from "@/entities/task";
+import {type Tag, TaskSortingEnum} from "@/entities/task";
 import {PAGINATION_LIMIT_ARRAY} from "@/features/task";
 import type {Pagination} from "@/shared/model/types/common";
 
@@ -12,6 +12,7 @@ const initialState: TaskState = {
     },
     pagination: undefined,
     selectedTask: undefined,
+    taskExpired: false,
     currentPagination: {
         page: 1,
         limit: PAGINATION_LIMIT_ARRAY[0],
@@ -44,8 +45,11 @@ export const taskSlice = createSlice({
             state.currentPagination = action.payload;
             state.fetchTasks = true;
         },
-        setSelectedTask: (state, action: PayloadAction<Task | undefined>) => {
+        setSelectedTask: (state, action: PayloadAction<string | undefined>) => {
             state.selectedTask = action.payload;
+        },
+        setTaskExpired: (state, action: PayloadAction<boolean>) => {
+            state.taskExpired = action.payload;
         },
         clearTasks: () => {
             return initialState;
@@ -57,6 +61,7 @@ export const {
     setPaginationInfo,
     clearTasks,
     setSelectedTask,
+    setTaskExpired,
     setCurrentPagination,
     setFilters,
     setFetchTasks,
