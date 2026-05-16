@@ -2,7 +2,14 @@
 
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {useAppDispatch, useAppSelector} from "@/shared/model/store";
-import {FiltersBlock, TaskComponent, TaskPagination, useGetTags, useGetTasks} from "@/features/task";
+import {
+    FiltersBlock,
+    TaskComponent,
+    TaskPagination,
+    useGetTags,
+    useGetTasks,
+    useUpdateTaskStatus
+} from "@/features/task";
 import {useEffect} from "react";
 import {setFetchTags, setFetchTasks, setFilters} from "@/shared/model/store/slices/task/task.slice";
 
@@ -10,12 +17,11 @@ const TaskList = () => {
     const dispatch = useAppDispatch();
 
     const filters = useAppSelector(state => state.task.filters);
-    const tasks = useAppSelector((state) => state.task.tasks);
     const tags = useAppSelector((state) => state.task.tags);
 
-    const { tasksLoading } = useGetTasks();
-
+    const { tasksLoading, tasks } = useGetTasks();
     const { tagsLoading } = useGetTags();
+    const { handleUpdateTaskStatus, updateStatusLoading, updatingTask } = useUpdateTaskStatus();
 
     const loading: boolean = tasksLoading || tagsLoading;
 
@@ -37,6 +43,8 @@ const TaskList = () => {
                             tagsList={tags}
                             setTag={(tag) =>
                                 dispatch(setFilters({ ...filters, tag: tag }))}
+                            handleUpdateTaskStatus={handleUpdateTaskStatus}
+                            disabled={updateStatusLoading && updatingTask.id === task.id}
                         />
                     ))
                 )}
