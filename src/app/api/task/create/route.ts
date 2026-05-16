@@ -19,8 +19,8 @@ export async function POST(request: NextRequest) {
         const taskId = crypto.randomUUID();
 
         const date = new Date();
-        const createdAt = formatDate(date, "sv-SE", "full");
-        const updatedAt = formatDate(date, "sv-SE", "full");
+        const createdAt = formatDate(date, "sv-SE", "fullString");
+        const updatedAt = formatDate(date, "sv-SE", "fullString");
 
         const task: Task = { ...body, updatedAt, id: taskId, createdAt, status: TaskStatusEnum.TODO }
 

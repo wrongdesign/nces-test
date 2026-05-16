@@ -71,7 +71,7 @@ export async function PATCH(
         )
 
         const date = new Date();
-        const newTask: Task = { ...findTask, ...body, updatedAt: formatDate(date, "sv-SE", "full") };
+        const newTask: Task = { ...findTask, ...body, updatedAt: formatDate(date, "sv-SE", "fullString") };
         const filteredTasks: Task[] = mockTasks.filter((task: Task) => task.id !== id);
         const newTasks: Task[] = [ ...filteredTasks, newTask ];
 
