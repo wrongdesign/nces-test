@@ -4,9 +4,10 @@ import type React from 'react';
 import { Suspense } from 'react';
 import NavBar from "@/widgets/NavBar/NavBar";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
+import withAuth from "@/shared/model/HOC/withAuth";
 
 
-export default function PanelLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+const PanelLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-200 dark:bg-background gap-8 px-6">
             <NavBar />
@@ -16,3 +17,5 @@ export default function PanelLayout({ children }: Readonly<{ children: React.Rea
         </div>
     );
 }
+
+export default withAuth(PanelLayout);
