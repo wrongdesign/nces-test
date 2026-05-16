@@ -8,9 +8,16 @@ import {
     type TaskSortingType,
     type TaskStatusType
 } from "@/entities/task";
+import {validateAccessToken} from "@/app/api/task/utils/auth";
 
 export async function GET(request: NextRequest) {
     try {
+        const authError = validateAccessToken(request);
+
+        if (authError) {
+            return authError;
+        }
+
         const searchParams = request.nextUrl.searchParams
 
         const page = Number(searchParams.get("page")) ?? undefined

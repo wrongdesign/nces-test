@@ -2,6 +2,7 @@ import type {Task, TaskStatusInterface} from "@/entities/task";
 import {readFile, writeFile} from "@/app/api/task/utils/common";
 import {type NextRequest, NextResponse} from "next/server";
 import {INTERNAL_ERROR} from "@/app/api/config/common";
+import {validateAccessToken} from "@/app/api/task/utils/auth";
 
 export async function PATCH(
     request: NextRequest,
@@ -12,6 +13,12 @@ export async function PATCH(
     }
 ) {
     try {
+        const authError = validateAccessToken(request);
+
+        if (authError) {
+            return authError;
+        }
+
         const { id } = await context.params;
 
         const { status }: TaskStatusInterface = await request.json();

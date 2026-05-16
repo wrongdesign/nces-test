@@ -4,9 +4,16 @@ import {type Task, TaskStatusEnum} from "@/entities/task";
 import {readFile, writeFile} from "@/app/api/task/utils/common";
 import {formatDate} from "@/shared/model/utils/date";
 import {INTERNAL_ERROR} from "@/app/api/config/common";
+import {validateAccessToken} from "@/app/api/task/utils/auth";
 
 export async function POST(request: NextRequest) {
     try {
+        const authError = validateAccessToken(request);
+
+        if (authError) {
+            return authError;
+        }
+
         const body: TaskSchemaType = await request.json();
         const mockTasks: Task[] = readFile("src/app/api/task/mocks/tasks.json");
         const taskId = crypto.randomUUID();

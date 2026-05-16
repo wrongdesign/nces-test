@@ -4,6 +4,7 @@ import type {Task} from "@/entities/task";
 import {readFile, writeFile} from "@/app/api/task/utils/common";
 import type {TaskSchemaType} from "@/features/task";
 import {formatDate} from "@/shared/model/utils/date";
+import {validateAccessToken} from "@/app/api/task/utils/auth";
 
 export async function GET(
     request: NextRequest,
@@ -14,6 +15,12 @@ export async function GET(
     }
 ) {
     try {
+        const authError = validateAccessToken(request);
+
+        if (authError) {
+            return authError;
+        }
+
         const { id } = await context.params;
         const mockTasks: Task[] = readFile("src/app/api/task/mocks/tasks.json");
         const findTask = mockTasks.find((task) => task.id === id);
@@ -43,6 +50,12 @@ export async function PATCH(
         }>
     }) {
     try {
+        const authError = validateAccessToken(request);
+
+        if (authError) {
+            return authError;
+        }
+
         const { id } = await context.params;
         const body: Partial<TaskSchemaType> = await request.json();
         const mockTasks: Task[] = readFile("src/app/api/task/mocks/tasks.json");
@@ -77,12 +90,19 @@ export async function PATCH(
 }
 
 export async function DELETE(
+    request: NextRequest,
     context: {
         params: Promise<{
             id: string
         }>
     }) {
     try {
+        const authError = validateAccessToken(request);
+
+        if (authError) {
+            return authError;
+        }
+
         const { id } = await context.params;
         const mockTasks: Task[] = readFile("src/app/api/task/mocks/tasks.json");
         const findTask = mockTasks.find((task) => task.id === id);
