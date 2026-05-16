@@ -36,7 +36,7 @@ const ControlledDatePicker = <T extends FieldValues>({ control, errors, name, la
                                         </Button>
                                     </PopoverTrigger>
                                     <PopoverContent className="w-auto p-0">
-                                        <Calendar mode="single" selected={value} onSelect={(value) => onChange(value?.toLocaleDateString())} />
+                                        <Calendar mode="single" selected={value} onSelect={(value) => onChange(value?.toISOString())} />
                                     </PopoverContent>
                                 </>
                             )
