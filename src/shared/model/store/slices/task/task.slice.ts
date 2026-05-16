@@ -7,7 +7,6 @@ import type {Pagination} from "@/shared/model/types/common";
 const initialState: TaskState = {
     fetchTags: true,
     fetchTasks: true,
-    tasks: undefined,
     filters: {
         sorting: TaskSortingEnum.CREATED_AT
     },
@@ -30,9 +29,6 @@ export const taskSlice = createSlice({
         setFetchTasks: (state, action: PayloadAction<boolean>) => {
             state.fetchTasks = action.payload;
         },
-        setTasks: (state, action: PayloadAction<Task[] | undefined>) => {
-            state.tasks = action.payload;
-        },
         setFilters: (state, action: PayloadAction<Partial<TaskFiltersModel>>) => {
             state.filters = {...state.filters, ...action.payload};
             state.currentPagination = { ...state.currentPagination, page: 1 };
@@ -40,13 +36,6 @@ export const taskSlice = createSlice({
         },
         setTags: (state, action: PayloadAction<Tag[] | undefined>) => {
             state.tags = action.payload;
-        },
-        setUpdatedTask: (state, action: PayloadAction<Task>) => {
-            if (state.tasks) {
-                state.tasks = state.tasks.map((task) => task.id === action.payload.id ?
-                    { ...task, ...action.payload } : task
-                )
-            }
         },
         setPaginationInfo: (state, action: PayloadAction<TaskPaginationResponse>) => {
             state.pagination = action.payload.pagination;
@@ -69,9 +58,7 @@ export const {
     clearTasks,
     setSelectedTask,
     setCurrentPagination,
-    setTasks,
     setFilters,
-    setUpdatedTask,
     setFetchTasks,
     setFetchTags,
     setTags,
