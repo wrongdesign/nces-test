@@ -2,28 +2,15 @@
 
 import {Button} from "@/shared/ui/button";
 import ConfirmModal from "@/widgets/ConfirmModal/ConfirmModal";
-import {clearUser} from "@/shared/model/store/slices/auth/auth.slice";
-import {useState, useTransition} from "react";
-import {useRouter} from "next/dist/client/components/navigation";
-import {useAppDispatch} from "@/shared/model/store";
+import {useState} from "react";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {LogOut} from "lucide-react";
+import useLogout from "@/shared/model/hooks/useLogout";
 
 const Logout = () => {
-    const dispatch = useAppDispatch();
-
     const [confirmModal, setConfirmModal] = useState<boolean>(false);
 
-    const router = useRouter();
-    const [isPending, startTransition] = useTransition();
-
-    const logout = () => {
-        dispatch(clearUser());
-
-        startTransition(() => {
-            router.replace('/');
-        });
-    };
+    const { isPending, logout } = useLogout();
 
     return (
         <>
