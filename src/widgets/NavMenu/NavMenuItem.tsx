@@ -6,7 +6,7 @@ import Link from "next/link";
 import { iconMap } from "@/widgets/NavMenu/config/config";
 
 const NavMenuItem = ({ location, text, disabled, icon }: INavMenuItem) => {
-  const Icon = iconMap[icon ?? "UserPen"];
+  const Icon = iconMap[icon ?? "SquarePlus"];
 
   return (
     <Link href={location ?? "#"}>
