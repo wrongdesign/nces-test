@@ -15,7 +15,7 @@ const useLogout = () => {
         dispatch(clearUser());
 
         startTransition(() => {
-            router.replace('/');
+            router.replace('/auth');
         });
     };
 

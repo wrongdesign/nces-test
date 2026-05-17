@@ -19,7 +19,7 @@ const useLogin = () => {
             await login(data).unwrap();
 
             startTransition(() => {
-                router.push("/otp");
+                router.push("/auth/otp");
             })
         } catch (e) {
             console.error(e);

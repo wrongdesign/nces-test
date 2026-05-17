@@ -65,7 +65,7 @@ const withAuth = <P extends object>(
         }, [userLogout]);
 
         useEffect(() => {
-            if (!token && pathname !== "/") {
+            if (!token && pathname !== "/auth") {
                 userLogout();
             }
         }, [token, pathname, userLogout]);
