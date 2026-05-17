@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "@/shared/model/store";
 import {useEffect} from "react";
 import {setSelectedTask, setUpdateSelectedTask} from "@/shared/model/store/slices/task/task.slice";
 import DefaultPageWrapper from "@/shared/ui/DefaultPageWrapper";
-import BackButton from "@/widgets/BackButton/BackButton";
+import BackButton from "@/shared/ui/BackButton/BackButton";
 import {cn} from "@/shared/model/utils/utils";
 import {TaskDetails} from "@/features/task";
 import {TaskMode} from "@/entities/task";

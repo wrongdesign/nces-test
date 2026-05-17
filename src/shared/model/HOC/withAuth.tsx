@@ -19,7 +19,7 @@ import {
 
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 
-import useLogout from "@/shared/model/hooks/useLogout";
+import useLogout from "@/features/auth/model/hooks/useLogout";
 
 const withAuth = <P extends object>(
     WrappedComponent: ComponentType<P>

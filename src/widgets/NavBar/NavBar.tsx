@@ -4,8 +4,8 @@ import {useRouter} from "next/navigation";
 import {useTransition} from "react";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import Image from "next/image";
-import Logout from "@/widgets/Logout/Logout";
-import ThemeToggle from "@/widgets/ThemeToggle/ThemeToggle";
+import Logout from "@/features/auth/ui/Logout/Logout";
+import ThemeToggle from "@/shared/ui/ThemeToggle/ThemeToggle";
 import DefaultBlock from "@/shared/ui/DefaultBlock";
 import NavMenu from "@/widgets/NavMenu/NavMenu";
 

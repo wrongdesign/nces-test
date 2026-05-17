@@ -1,11 +1,11 @@
 "use client"
 
 import {Button} from "@/shared/ui/button";
-import ConfirmModal from "@/widgets/ConfirmModal/ConfirmModal";
+import ConfirmModal from "@/shared/ui/ConfirmModal/ConfirmModal";
 import {useState} from "react";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {LogOut} from "lucide-react";
-import useLogout from "@/shared/model/hooks/useLogout";
+import useLogout from "@/features/auth/model/hooks/useLogout";
 
 const Logout = () => {
     const [confirmModal, setConfirmModal] = useState<boolean>(false);

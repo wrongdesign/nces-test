@@ -12,7 +12,7 @@ import {
     useTaskDetailsActions
 } from "@/features/task";
 import {zodResolver} from "@hookform/resolvers/zod";
-import DefaultFormWrapper from "@/widgets/DefaultFormWrapper/DefaultFormWrapper";
+import DefaultFormWrapper from "@/shared/ui/DefaultFormWrapper/DefaultFormWrapper";
 import FormField from "@/shared/ui/FormField";
 import {cn} from "@/shared/model/utils/utils";
 import {
