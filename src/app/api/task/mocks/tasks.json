@@ -69,13 +69,13 @@
     "id": "task_4",
     "title": "CRM Backend",
     "description": "Payments module integration",
-    "status": "done",
+    "status": "inProgress",
     "priority": "low",
-    "deadline": "2025-09-22 12:00:00",
+    "deadline": "2026-01-07T21:00:00.000Z",
     "tags": [
       "tag_backend"
     ],
     "createdAt": "2026-05-14 12:00:00",
-    "updatedAt": "2026-05-17 01:51:25"
+    "updatedAt": "2026-05-17 22:41:11"
   }
 ]
