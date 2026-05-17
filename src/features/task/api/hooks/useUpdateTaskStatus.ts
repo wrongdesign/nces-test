@@ -11,15 +11,15 @@ import {useState} from "react";
 const useUpdateTaskStatus = () => {
     const dispatch = useAppDispatch();
 
-    const [updateTaskStatus, { isLoading: updateStatusLoading, error: updateStatusError }] = useUpdateStatusMutation();
+    const [updateTaskStatus, {isLoading: updateStatusLoading, error: updateStatusError}] = useUpdateStatusMutation();
 
-    const [updatingTask, setUpdatingTask] = useState<Pick<TaskStatusUpdate, "id">>({ id: "" });
+    const [updatingTask, setUpdatingTask] = useState<Pick<TaskStatusUpdate, "id">>({id: ""});
 
     useApiErrorToast(updateStatusError);
 
     const handleUpdateTaskStatus = async (data: TaskStatusUpdate, mode: TaskStatusUpdateModeType = TaskStatusUpdateModeEnum.DEFAULT) => {
         try {
-            setUpdatingTask({ id: data.id });
+            setUpdatingTask({id: data.id});
 
             await updateTaskStatus(data).unwrap();
 
@@ -31,7 +31,7 @@ const useUpdateTaskStatus = () => {
         } catch (e) {
             console.error(e);
         } finally {
-            setUpdatingTask({ id: "" });
+            setUpdatingTask({id: ""});
         }
     }
 

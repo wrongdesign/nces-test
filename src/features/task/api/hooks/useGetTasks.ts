@@ -18,7 +18,7 @@ const useGetTasks = () => {
     const filters = useAppSelector(state => state.task.filters);
 
     const {data: tasks, isLoading: tasksLoading, error: getTasksError, refetch: getTasks} =
-        useGetTasksQuery({ ...currentPagination, ...filters });
+        useGetTasksQuery({...currentPagination, ...filters});
 
     useApiErrorToast(getTasksError);
 
@@ -30,7 +30,7 @@ const useGetTasks = () => {
 
     useEffect(() => {
         if (tasks) {
-            dispatch(setPaginationInfo({ pagination: tasks?.pagination }));
+            dispatch(setPaginationInfo({pagination: tasks?.pagination}));
             dispatch(setFetchTasks(false));
             dispatch(setFetchTags(true));
         }

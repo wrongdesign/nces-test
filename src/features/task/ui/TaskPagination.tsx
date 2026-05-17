@@ -22,26 +22,26 @@ const TaskPagination = () => {
     const goPrevious = () => {
         if (!taskPaginationInfo?.hasPrevPage) return;
 
-        dispatch(setCurrentPagination({ ...currentPagination, page: currentPagination.page - 1 }));
+        dispatch(setCurrentPagination({...currentPagination, page: currentPagination.page - 1}));
     }
 
     const goNext = () => {
         if (!taskPaginationInfo?.hasNextPage) return;
 
-        dispatch(setCurrentPagination({ ...currentPagination, page: currentPagination.page + 1 }));
+        dispatch(setCurrentPagination({...currentPagination, page: currentPagination.page + 1}));
     }
-    return(
+    return (
         <div className="flex items-center justify-between gap-4">
             <Field orientation="horizontal" className="w-fit">
                 <FieldLabel htmlFor="select-rows-per-page">Items on page</FieldLabel>
                 <Select
                     defaultValue={String(currentPagination.limit)}
                     onValueChange={(value) => {
-                        dispatch(setCurrentPagination({ page: 1, limit: Number(value) }));
+                        dispatch(setCurrentPagination({page: 1, limit: Number(value)}));
                     }}
                 >
                     <SelectTrigger className="w-20" id="select-rows-per-page">
-                        <SelectValue />
+                        <SelectValue/>
                     </SelectTrigger>
                     <SelectContent align="start">
                         <SelectGroup>
@@ -58,13 +58,13 @@ const TaskPagination = () => {
                         onClick={goPrevious}
                         className={cn("cursor-pointer", !taskPaginationInfo?.hasPrevPage && "cursor-not-allowed")}
                     >
-                        <PaginationPrevious />
+                        <PaginationPrevious/>
                     </PaginationItem>
                     <PaginationItem
                         onClick={goNext}
                         className={cn("cursor-pointer", !taskPaginationInfo?.hasNextPage && "cursor-not-allowed")}
                     >
-                        <PaginationNext />
+                        <PaginationNext/>
                     </PaginationItem>
                 </PaginationContent>
             </Pagination>

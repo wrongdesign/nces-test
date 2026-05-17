@@ -12,20 +12,20 @@ import LoaderComponent from "@/shared/ui/LoaderComponent";
 const CreateTaskPage = () => {
     const dispatch = useAppDispatch();
 
-    const { tagsLoading } = useGetTags();
+    const {tagsLoading} = useGetTags();
 
     useEffect(() => {
         dispatch(setFetchTags(true));
     }, [dispatch]);
 
-    return(
+    return (
         <DefaultPageWrapper
-            backButton={<BackButton />}
+            backButton={<BackButton/>}
             title={"Create Task"}
         >
-            <TaskDetails taskMode={TaskMode.CREATE} />
+            <TaskDetails taskMode={TaskMode.CREATE}/>
 
-            {tagsLoading && <LoaderComponent />}
+            {tagsLoading && <LoaderComponent/>}
         </DefaultPageWrapper>
     );
 }

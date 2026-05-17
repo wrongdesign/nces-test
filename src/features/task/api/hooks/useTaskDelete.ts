@@ -19,7 +19,7 @@ const useTaskDelete = () => {
 
     const handleDeleteTask = async (id: string) => {
         try {
-            await deleteTask({ id: id }).unwrap();
+            await deleteTask({id: id}).unwrap();
 
             startTransition(() => {
                 router.replace("/");

@@ -10,14 +10,14 @@ const useTaskUpdate = () => {
     const dispatch = useAppDispatch();
     const selectedTask = useAppSelector(state => state.task.selectedTask);
 
-    const [updateTask, { isLoading: updateTaskLoading, error: updateTaskError }] = useUpdateTaskMutation();
+    const [updateTask, {isLoading: updateTaskLoading, error: updateTaskError}] = useUpdateTaskMutation();
 
     useApiErrorToast(updateTaskError);
 
     const handleUpdateTask = async (data: TaskSchemaType) => {
         try {
             if (selectedTask) {
-                await updateTask({ data, id: selectedTask }).unwrap();
+                await updateTask({data, id: selectedTask}).unwrap();
 
                 dispatch(setUpdateSelectedTask(true));
             }

@@ -13,7 +13,7 @@ interface Props {
     tags: Tag[] | undefined;
 }
 
-const SelectFiltersList = ({ tags }: Props) => {
+const SelectFiltersList = ({tags}: Props) => {
     const dispatch = useAppDispatch();
 
     const filters = useAppSelector(state => state.task.filters);
@@ -25,14 +25,14 @@ const SelectFiltersList = ({ tags }: Props) => {
         return tags.find((tag) => tag.id === filters.tag);
     }, [filters?.tag, tags])
 
-    return(
+    return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <CustomSelect
                 value={filters?.status}
                 selectedValue={selectedStatus}
                 name={"status"}
                 onValueChange={(value) =>
-                    dispatch(setFilters({ ...filters, status: value === "all" ? undefined : (value as TaskStatusType)}))}
+                    dispatch(setFilters({...filters, status: value === "all" ? undefined : (value as TaskStatusType)}))}
             >
                 {TaskStatusesArray.map((item) => {
                     return (
@@ -48,12 +48,13 @@ const SelectFiltersList = ({ tags }: Props) => {
                 selectedValue={selectedPriority}
                 name={"priority"}
                 onValueChange={(value) =>
-                    dispatch(setFilters({ ...filters, priority: value === "all" ? undefined : (value as PriorityType)}))
+                    dispatch(setFilters({...filters, priority: value === "all" ? undefined : (value as PriorityType)}))
                 }
             >
                 {PriorityArray.map((item) => {
                     return (
-                        <SelectItem value={item} key={`${item}-search-priority-select`} className={selectItemClassNames}>
+                        <SelectItem value={item} key={`${item}-search-priority-select`}
+                                    className={selectItemClassNames}>
                             {PriorityLabeled[item].label}
                         </SelectItem>
                     );
@@ -65,12 +66,16 @@ const SelectFiltersList = ({ tags }: Props) => {
                 selectedValue={selectedTag?.name}
                 name={"tag"}
                 onValueChange={(value) =>
-                    dispatch(setFilters({ ...filters, tag: value === "all" ? undefined : tags?.find(item => item.name === value)?.id}))
+                    dispatch(setFilters({
+                        ...filters,
+                        tag: value === "all" ? undefined : tags?.find(item => item.name === value)?.id
+                    }))
                 }
             >
                 {tags?.map((item) => {
                     return (
-                        <SelectItem value={item.name} key={`${item.id}-search-tag-select`} className={selectItemClassNames}>
+                        <SelectItem value={item.name} key={`${item.id}-search-tag-select`}
+                                    className={selectItemClassNames}>
                             {item.name}
                         </SelectItem>
                     );

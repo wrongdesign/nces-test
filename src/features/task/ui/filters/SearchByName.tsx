@@ -12,13 +12,13 @@ const SearchByName = () => {
 
     const [name, setName] = useState<string>(filters?.name ?? "");
 
-    const { debouncedVal } = useDebounce<string>({ value: name, delay: 500 });
+    const {debouncedVal} = useDebounce<string>({value: name, delay: 500});
 
     useEffect(() => {
-        dispatch(setFilters({ name: debouncedVal.length > 0 ? debouncedVal : undefined }));
+        dispatch(setFilters({name: debouncedVal.length > 0 ? debouncedVal : undefined}));
     }, [debouncedVal, dispatch]);
 
-    return(
+    return (
         <Input
             className="col-span-2"
             placeholder={"Search by task title"}

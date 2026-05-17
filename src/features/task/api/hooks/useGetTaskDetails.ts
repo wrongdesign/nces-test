@@ -12,7 +12,12 @@ const useGetTaskDetails = () => {
     const taskId = useAppSelector(state => state.task.selectedTask);
     const taskFetch = useAppSelector(state => state.task.updateSelectedTask);
 
-    const { data: task, isLoading: getTaskLoading, error: getTaskError, refetch: taskRefetch } = useGetTaskByIdQuery(taskId ?? { id: "" });
+    const {
+        data: task,
+        isLoading: getTaskLoading,
+        error: getTaskError,
+        refetch: taskRefetch
+    } = useGetTaskByIdQuery(taskId ?? {id: ""});
 
     useApiErrorToast(getTaskError);
 
@@ -24,7 +29,7 @@ const useGetTaskDetails = () => {
     }, [taskFetch, taskRefetch, dispatch]);
 
     useEffect(() => {
-        if(task) {
+        if (task) {
             const expiredDeadline: boolean = new Date() > new Date(task.deadline) && task.status !== TaskStatusEnum.DONE;
             dispatch(setTaskExpired(expiredDeadline));
         } else {

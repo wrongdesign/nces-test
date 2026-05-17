@@ -19,9 +19,9 @@ const TaskList = () => {
     const filters = useAppSelector(state => state.task.filters);
     const tags = useAppSelector((state) => state.task.tags);
 
-    const { tasksLoading, tasks } = useGetTasks();
-    const { tagsLoading } = useGetTags();
-    const { handleUpdateTaskStatus, updateStatusLoading, updatingTask } = useUpdateTaskStatus();
+    const {tasksLoading, tasks} = useGetTasks();
+    const {tagsLoading} = useGetTags();
+    const {handleUpdateTaskStatus, updateStatusLoading, updatingTask} = useUpdateTaskStatus();
 
     const loading: boolean = tasksLoading || tagsLoading;
 
@@ -30,9 +30,9 @@ const TaskList = () => {
         dispatch(setFetchTags(true));
     }, [dispatch]);
 
-    return(
+    return (
         <div className="flex flex-col gap-2 w-full!">
-            <FiltersBlock tags={tags} />
+            <FiltersBlock tags={tags}/>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {tasks && tasks.length > 0 && (
@@ -42,16 +42,16 @@ const TaskList = () => {
                             {...task}
                             tagsList={tags}
                             setTag={(tag) =>
-                                dispatch(setFilters({ ...filters, tag: tag }))}
+                                dispatch(setFilters({...filters, tag: tag}))}
                             handleUpdateTaskStatus={handleUpdateTaskStatus}
                             disabled={updateStatusLoading && updatingTask.id === task.id}
                         />
                     ))
                 )}
-                {loading && <LoaderComponent fixed={true} />}
+                {loading && <LoaderComponent fixed={true}/>}
             </div>
 
-            <TaskPagination />
+            <TaskPagination/>
         </div>
 
     );

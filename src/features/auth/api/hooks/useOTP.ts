@@ -17,7 +17,7 @@ const useOTP = () => {
 
     const onSubmit = async (code: string) => {
         try {
-            const response = await sendOtp({ pin: code }).unwrap();
+            const response = await sendOtp({pin: code}).unwrap();
 
             if (response) {
                 dispatch(updateUser(response));

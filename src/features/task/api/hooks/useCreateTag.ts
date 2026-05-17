@@ -13,9 +13,9 @@ const useCreateTag = () => {
 
     useApiErrorToast(createTagError);
 
-    const handleCreateTag = async ({ name }: Pick<Tag, "name">): Promise<Tag | undefined> => {
+    const handleCreateTag = async ({name}: Pick<Tag, "name">): Promise<Tag | undefined> => {
         try {
-            const response = await createTag({ name }).unwrap();
+            const response = await createTag({name}).unwrap();
 
             if (response) {
                 dispatch(setFetchTags(true));
