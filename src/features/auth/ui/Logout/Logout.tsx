@@ -1,7 +1,7 @@
 "use client"
 
 import {Button} from "@/shared/ui/button";
-import ConfirmModal from "@/shared/ui/ConfirmModal/ConfirmModal";
+import ConfirmModal from "@/shared/ui/ConfirmModal";
 import {useState} from "react";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
 import {LogOut} from "lucide-react";

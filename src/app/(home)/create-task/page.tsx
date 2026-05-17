@@ -1,6 +1,6 @@
 "use client"
 
-import BackButton from "@/shared/ui/BackButton/BackButton";
+import BackButton from "@/shared/ui/BackButton";
 import {TaskDetails, useGetTags} from "@/features/task";
 import {TaskMode} from "@/entities/task";
 import DefaultPageWrapper from "@/shared/ui/DefaultPageWrapper";

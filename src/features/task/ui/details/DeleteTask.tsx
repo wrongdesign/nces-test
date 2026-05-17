@@ -1,6 +1,6 @@
 "use client"
 
-import ConfirmModal from "@/shared/ui/ConfirmModal/ConfirmModal";
+import ConfirmModal from "@/shared/ui/ConfirmModal";
 import {Button} from "@/shared/ui/button";
 import {useState} from "react";
 

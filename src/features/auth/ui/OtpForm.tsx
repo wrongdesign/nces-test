@@ -4,7 +4,7 @@ import {Field, FieldLabel} from "@/shared/ui/field";
 import {InputOTP, InputOTPGroup, InputOTPSlot} from "@/shared/ui/input-otp";
 import {REGEXP_ONLY_DIGITS} from "input-otp";
 import {useState} from "react";
-import DefaultFormWrapper from "@/shared/ui/DefaultFormWrapper/DefaultFormWrapper";
+import DefaultFormWrapper from "@/shared/ui/DefaultFormWrapper";
 import useOTP from "@/features/auth/api/hooks/useOTP";
 
 const OtpForm = () => {
