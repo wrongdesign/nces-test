@@ -23,7 +23,7 @@ const useOTP = () => {
                 dispatch(updateUser(response));
 
                 startTransition(() => {
-                    router.push("/dashboard");
+                    router.push("/");
                 })
             }
         } catch (e) {

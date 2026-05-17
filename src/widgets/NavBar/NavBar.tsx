@@ -27,7 +27,7 @@ const NavBar = () => {
                         style={{ height: 'auto', width: 'auto' }}
                         onClick={() =>
                             startTransition(() => {
-                                router.push('/dashboard');
+                                router.push('/');
                             })
                         }
                     />

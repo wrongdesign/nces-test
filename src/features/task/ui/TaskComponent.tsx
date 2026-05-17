@@ -48,7 +48,7 @@ const TaskComponent = React.memo(
                 onClick={() => {
                     dispatch(setTaskExpired(expiredDeadline));
                     startTransition(() => {
-                        router.push(`/dashboard/task/${id}`);
+                        router.push(`/task/${id}`);
                     })
                 }}
                 disabled={disabled}

@@ -23,7 +23,7 @@ const useTaskCreate = () => {
             }).unwrap();
 
             startTransition(() => {
-                router.replace("/dashboard")
+                router.replace("/")
             });
         } catch (e) {
             console.error(e);

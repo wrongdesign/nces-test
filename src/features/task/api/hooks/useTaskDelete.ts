@@ -22,7 +22,7 @@ const useTaskDelete = () => {
             await deleteTask({ id: id }).unwrap();
 
             startTransition(() => {
-                router.replace("/dashboard");
+                router.replace("/");
             });
 
             dispatch(setSelectedTask(undefined));

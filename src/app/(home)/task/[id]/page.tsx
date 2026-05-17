@@ -1,4 +1,4 @@
-import TaskDetailsPageContent from "@/app/dashboard/task/[id]/TaskDetailsPageContent";
+import TaskDetailsPageContent from "@/app/(home)/task/[id]/TaskDetailsPageContent";
 
 const TaskDetailsPage = async ({ params }: { params: Promise<{ id: string }>; }) => {
     const { id } = await params;
