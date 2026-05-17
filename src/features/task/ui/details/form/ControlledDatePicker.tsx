@@ -22,6 +22,8 @@ const ControlledDatePicker = <T extends FieldValues>({ control, errors, name, la
                         control={control}
                         name={name}
                         render={({ field: { onChange, onBlur, value } }) => {
+                            const selectedDate: Date | undefined = value ? new Date(value) : value;
+
                             return (
                                 <>
                                     <PopoverTrigger asChild>
@@ -36,7 +38,7 @@ const ControlledDatePicker = <T extends FieldValues>({ control, errors, name, la
                                         </Button>
                                     </PopoverTrigger>
                                     <PopoverContent className="w-auto p-0">
-                                        <Calendar mode="single" selected={value} onSelect={(value) => onChange(value?.toISOString())} />
+                                        <Calendar mode="single" selected={selectedDate} month={selectedDate} onSelect={(value) => onChange(value?.toISOString())} />
                                     </PopoverContent>
                                 </>
                             )
