@@ -1,4 +1,4 @@
-### Тестовое задание на позицию Middle Frontend Developer React
+### Тестовое задание на позицию Middle Frontend Developer React - Национальный центр электронных услуг,РУП
 
 Это Next.js SPA, построенное на App Router. Проект включает в себя: 
 - Шаг аторизации
