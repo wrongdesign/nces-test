@@ -19,10 +19,12 @@ const NavBar = () => {
                 <DefaultBlock>
                     <Image
                         alt={'Logo'}
+                        loading="eager"
                         className="cursor-pointer"
                         height={30}
-                        src={'/logo.png'}
+                        src={'/logo.webp'}
                         width={40}
+                        style={{ height: 'auto', width: 'auto' }}
                         onClick={() =>
                             startTransition(() => {
                                 router.push('/dashboard');
