@@ -163,7 +163,7 @@ pnpm start
 pnpm run lint
 ```
 
-## Скрипты
+### Скрипты
 
 - `dev` — запуск дев‑сервера Next.js с Webpack
 - `build` — сборка приложения
