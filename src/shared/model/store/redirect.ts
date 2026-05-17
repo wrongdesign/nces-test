@@ -1,3 +1,3 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction } from "@reduxjs/toolkit";
 
-export const redirectToLogin = createAction<string>('redirect/redirectToLogin');
+export const redirectToLogin = createAction<string>("redirect/redirectToLogin");

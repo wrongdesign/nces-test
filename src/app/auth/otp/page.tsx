@@ -1,11 +1,11 @@
-import {AuthWrapper, OtpForm} from "@/features/auth";
+import { AuthWrapper, OtpForm } from "@/features/auth";
 
 const OtpPage = () => {
-    return(
-        <AuthWrapper>
-            <OtpForm />
-        </AuthWrapper>
-    );
-}
+  return (
+    <AuthWrapper>
+      <OtpForm />
+    </AuthWrapper>
+  );
+};
 
 export default OtpPage;

@@ -1,77 +1,84 @@
-import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
-import type {TaskFiltersModel, TaskPaginationResponse, TaskState} from "./task.model";
-import {type Tag, TaskSortingEnum} from "@/entities/task";
-import {PAGINATION_LIMIT_ARRAY} from "@/features/task";
-import type {Pagination} from "@/shared/model/types/common";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type {
+  TaskFiltersModel,
+  TaskPaginationResponse,
+  TaskState,
+} from "./task.model";
+import { type Tag, TaskSortingEnum } from "@/entities/task";
+import { PAGINATION_LIMIT_ARRAY } from "@/features/task";
+import type { Pagination } from "@/shared/model/types/common";
 
 const initialState: TaskState = {
-    fetchTags: true,
-    fetchTasks: true,
-    filters: {
-        sorting: TaskSortingEnum.CREATED_AT
-    },
-    pagination: undefined,
-    selectedTask: undefined,
-    updateSelectedTask: false,
-    taskExpired: false,
-    currentPagination: {
-        page: 1,
-        limit: PAGINATION_LIMIT_ARRAY[0],
-    },
-    tags: undefined,
-}
+  fetchTags: true,
+  fetchTasks: true,
+  filters: {
+    sorting: TaskSortingEnum.CREATED_AT,
+  },
+  pagination: undefined,
+  selectedTask: undefined,
+  updateSelectedTask: false,
+  taskExpired: false,
+  currentPagination: {
+    page: 1,
+    limit: PAGINATION_LIMIT_ARRAY[0],
+  },
+  tags: undefined,
+};
 
 export const taskSlice = createSlice({
-    name: 'task',
-    initialState,
-    reducers: {
-        setFetchTags: (state, action: PayloadAction<boolean>) => {
-            state.fetchTags = action.payload;
-        },
-        setFetchTasks: (state, action: PayloadAction<boolean>) => {
-            state.fetchTasks = action.payload;
-        },
-        setFilters: (state, action: PayloadAction<Partial<TaskFiltersModel>>) => {
-            state.filters = {...state.filters, ...action.payload};
-            state.currentPagination = { ...state.currentPagination, page: 1 };
-            state.fetchTasks = true;
-        },
-        setTags: (state, action: PayloadAction<Tag[] | undefined>) => {
-            state.tags = action.payload;
-        },
-        setPaginationInfo: (state, action: PayloadAction<TaskPaginationResponse>) => {
-            state.pagination = action.payload.pagination;
-        },
-        setCurrentPagination: (state, action: PayloadAction<Pagination>) => {
-            state.currentPagination = action.payload;
-            state.fetchTasks = true;
-        },
-        setSelectedTask: (state, action: PayloadAction<string | undefined>) => {
-            if (action.payload) state.selectedTask = { id: action.payload }
-            else state.selectedTask = undefined;
-        },
-        setUpdateSelectedTask: (state, action: PayloadAction<boolean>) => {
-            state.updateSelectedTask = action.payload;
-        },
-        setTaskExpired: (state, action: PayloadAction<boolean>) => {
-            state.taskExpired = action.payload;
-        },
-        clearTasks: () => {
-            return initialState;
-        },
+  name: "task",
+  initialState,
+  reducers: {
+    setFetchTags: (state, action: PayloadAction<boolean>) => {
+      state.fetchTags = action.payload;
     },
+    setFetchTasks: (state, action: PayloadAction<boolean>) => {
+      state.fetchTasks = action.payload;
+    },
+    setFilters: (state, action: PayloadAction<Partial<TaskFiltersModel>>) => {
+      state.filters = { ...state.filters, ...action.payload };
+      state.currentPagination = { ...state.currentPagination, page: 1 };
+      state.fetchTasks = true;
+    },
+    setTags: (state, action: PayloadAction<Tag[] | undefined>) => {
+      state.tags = action.payload;
+    },
+    setPaginationInfo: (
+      state,
+      action: PayloadAction<TaskPaginationResponse>,
+    ) => {
+      state.pagination = action.payload.pagination;
+    },
+    setCurrentPagination: (state, action: PayloadAction<Pagination>) => {
+      state.currentPagination = action.payload;
+      state.fetchTasks = true;
+    },
+    setSelectedTask: (state, action: PayloadAction<string | undefined>) => {
+      if (action.payload) state.selectedTask = { id: action.payload };
+      else state.selectedTask = undefined;
+    },
+    setUpdateSelectedTask: (state, action: PayloadAction<boolean>) => {
+      state.updateSelectedTask = action.payload;
+    },
+    setTaskExpired: (state, action: PayloadAction<boolean>) => {
+      state.taskExpired = action.payload;
+    },
+    clearTasks: () => {
+      return initialState;
+    },
+  },
 });
 
 export const {
-    setPaginationInfo,
-    clearTasks,
-    setSelectedTask,
-    setTaskExpired,
-    setCurrentPagination,
-    setFilters,
-    setFetchTasks,
-    setFetchTags,
-    setTags,
-    setUpdateSelectedTask,
+  setPaginationInfo,
+  clearTasks,
+  setSelectedTask,
+  setTaskExpired,
+  setCurrentPagination,
+  setFilters,
+  setFetchTasks,
+  setFetchTags,
+  setTags,
+  setUpdateSelectedTask,
 } = taskSlice.actions;
 export default taskSlice.reducer;

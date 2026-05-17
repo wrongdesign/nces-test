@@ -1,35 +1,36 @@
-"use client"
+"use client";
 
-import {useUpdateTaskMutation} from "@/shared/model/store/api/task.api";
-import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
-import type {TaskSchemaType} from "@/features/task";
-import {useAppDispatch, useAppSelector} from "@/shared/model/store";
-import {setUpdateSelectedTask} from "@/shared/model/store/slices/task/task.slice";
+import { useUpdateTaskMutation } from "@/shared/model/store/api/task.api";
+import { useApiErrorToast } from "@/shared/model/hooks/useApiErrorToast";
+import type { TaskSchemaType } from "@/features/task";
+import { useAppDispatch, useAppSelector } from "@/shared/model/store";
+import { setUpdateSelectedTask } from "@/shared/model/store/slices/task/task.slice";
 
 const useTaskUpdate = () => {
-    const dispatch = useAppDispatch();
-    const selectedTask = useAppSelector(state => state.task.selectedTask);
+  const dispatch = useAppDispatch();
+  const selectedTask = useAppSelector((state) => state.task.selectedTask);
 
-    const [updateTask, {isLoading: updateTaskLoading, error: updateTaskError}] = useUpdateTaskMutation();
+  const [updateTask, { isLoading: updateTaskLoading, error: updateTaskError }] =
+    useUpdateTaskMutation();
 
-    useApiErrorToast(updateTaskError);
+  useApiErrorToast(updateTaskError);
 
-    const handleUpdateTask = async (data: TaskSchemaType) => {
-        try {
-            if (selectedTask) {
-                await updateTask({data, id: selectedTask}).unwrap();
+  const handleUpdateTask = async (data: TaskSchemaType) => {
+    try {
+      if (selectedTask) {
+        await updateTask({ data, id: selectedTask }).unwrap();
 
-                dispatch(setUpdateSelectedTask(true));
-            }
-        } catch (e) {
-            console.error(e);
-        }
+        dispatch(setUpdateSelectedTask(true));
+      }
+    } catch (e) {
+      console.error(e);
     }
+  };
 
-    return {
-        updateTaskLoading,
-        handleUpdateTask,
-    };
-}
+  return {
+    updateTaskLoading,
+    handleUpdateTask,
+  };
+};
 
 export default useTaskUpdate;

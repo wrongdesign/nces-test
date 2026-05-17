@@ -1,38 +1,58 @@
-"use client"
+"use client";
 
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/shared/ui/dropdown-menu";
-import {StatusesLabeled, TaskStatusEnum, TaskStatusesArray, type TaskStatusType} from "@/entities/task";
-import {cn} from "@/shared/model/utils/utils";
-import {Badge} from "@/shared/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/shared/ui/dropdown-menu";
+import {
+  StatusesLabeled,
+  TaskStatusEnum,
+  TaskStatusesArray,
+  type TaskStatusType,
+} from "@/entities/task";
+import { cn } from "@/shared/model/utils/utils";
+import { Badge } from "@/shared/ui/badge";
 
 interface Props {
-    status: TaskStatusType;
-    updateStatus: (data: TaskStatusType) => Promise<void>;
+  status: TaskStatusType;
+  updateStatus: (data: TaskStatusType) => Promise<void>;
 }
 
 const StatusChange = ({ status, updateStatus }: Props) => {
-    return(
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild className="hover:scale-[1.1]">
-                <Badge className={cn(
-                    `px-2 py-1 rounded-lg text-xs font-semibold text-white select-none! cursor-pointer!`,
-                    StatusesLabeled[status ?? TaskStatusEnum.TODO]?.classNames
-                )}>
-                    {StatusesLabeled[status ?? TaskStatusEnum.TODO]?.label}
-                </Badge>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent sideOffset={8} align="end" className="border-0 bg-background/90 p-0">
-                {TaskStatusesArray.map((statusItem) => (
-                    <DropdownMenuItem key={statusItem} onClick={async (e) => {
-                        e.stopPropagation();
-                        await updateStatus(statusItem);
-                    }} className="defaultDropDownPoint">
-                        {StatusesLabeled[statusItem ?? TaskStatusEnum.TODO]?.label}
-                    </DropdownMenuItem>
-                ))}
-            </DropdownMenuContent>
-        </DropdownMenu>
-    );
-}
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild className="hover:scale-[1.1]">
+        <Badge
+          className={cn(
+            `px-2 py-1 rounded-lg text-xs font-semibold text-white select-none! cursor-pointer!`,
+            StatusesLabeled[status ?? TaskStatusEnum.TODO]?.classNames,
+          )}
+        >
+          {StatusesLabeled[status ?? TaskStatusEnum.TODO]?.label}
+        </Badge>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        sideOffset={8}
+        align="end"
+        className="border-0 bg-background/90 p-0"
+      >
+        {TaskStatusesArray.map((statusItem) => (
+          <DropdownMenuItem
+            key={statusItem}
+            onClick={async (e) => {
+              e.stopPropagation();
+              await updateStatus(statusItem);
+            }}
+            className="defaultDropDownPoint"
+          >
+            {StatusesLabeled[statusItem ?? TaskStatusEnum.TODO]?.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 export default StatusChange;

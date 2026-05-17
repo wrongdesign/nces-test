@@ -1,40 +1,41 @@
-import {useVerify2faMutation} from "@/shared/model/store/api/auth.api";
-import {useApiErrorToast} from "@/shared/model/hooks/useApiErrorToast";
-import {useRouter} from "next/navigation";
-import {useTransition} from "react";
-import {useAppDispatch} from "@/shared/model/store";
-import {updateUser} from "@/shared/model/store/slices/auth/auth.slice";
+import { useVerify2faMutation } from "@/shared/model/store/api/auth.api";
+import { useApiErrorToast } from "@/shared/model/hooks/useApiErrorToast";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { useAppDispatch } from "@/shared/model/store";
+import { updateUser } from "@/shared/model/store/slices/auth/auth.slice";
 
 const useOTP = () => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    const [sendOtp, {isLoading: sendOtpLoading, error: sendOtpError}] = useVerify2faMutation();
+  const [sendOtp, { isLoading: sendOtpLoading, error: sendOtpError }] =
+    useVerify2faMutation();
 
-    useApiErrorToast(sendOtpError);
+  useApiErrorToast(sendOtpError);
 
-    const router = useRouter();
-    const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-    const onSubmit = async (code: string) => {
-        try {
-            const response = await sendOtp({pin: code}).unwrap();
+  const onSubmit = async (code: string) => {
+    try {
+      const response = await sendOtp({ pin: code }).unwrap();
 
-            if (response) {
-                dispatch(updateUser(response));
+      if (response) {
+        dispatch(updateUser(response));
 
-                startTransition(() => {
-                    router.push("/");
-                })
-            }
-        } catch (e) {
-            console.error(e);
-        }
+        startTransition(() => {
+          router.push("/");
+        });
+      }
+    } catch (e) {
+      console.error(e);
     }
+  };
 
-    return {
-        loading: sendOtpLoading || isPending,
-        onSubmit
-    };
-}
+  return {
+    loading: sendOtpLoading || isPending,
+    onSubmit,
+  };
+};
 
 export default useOTP;
