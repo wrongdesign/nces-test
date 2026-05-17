@@ -1,6 +1,13 @@
 "use client"
 
-import {PriorityLabeled, type Tag, type Task, type TaskStatusType, type TaskStatusUpdate} from "@/entities/task";
+import {
+    PriorityLabeled,
+    type Tag,
+    type Task,
+    TaskStatusEnum,
+    type TaskStatusType,
+    type TaskStatusUpdate
+} from "@/entities/task";
 import {Button} from "@/shared/ui/button";
 import {cn} from "@/shared/model/utils/utils";
 import {CalendarClock} from "lucide-react";
@@ -10,8 +17,6 @@ import {StatusChange} from "@/features/task";
 import {useRouter} from "next/navigation";
 import React, {useTransition} from "react";
 import LoaderComponent from "@/shared/ui/LoaderComponent";
-import {useAppDispatch} from "@/shared/model/store";
-import {setTaskExpired} from "@/shared/model/store/slices/task/task.slice";
 
 interface Props {
     tagsList: Tag[] | undefined;
@@ -34,8 +39,6 @@ const TaskComponent = React.memo(
          handleUpdateTaskStatus,
          disabled,
      }: Task & Props) => {
-        const dispatch = useAppDispatch();
-
         const router = useRouter();
         const [isPending, startTransition] = useTransition();
 
@@ -44,9 +47,8 @@ const TaskComponent = React.memo(
         return(
             <Button
                 className="flex flex-col gap-2 h-full justify-start! rounded-2xl p-5 hover:shadow-lg transition-all cursor-pointer select-none"
-                variant={expiredDeadline ? "destructive" : "secondary"}
+                variant={expiredDeadline && status !== TaskStatusEnum.DONE ? "destructive" : "secondary"}
                 onClick={() => {
-                    dispatch(setTaskExpired(expiredDeadline));
                     startTransition(() => {
                         router.push(`/task/${id}`);
                     })
